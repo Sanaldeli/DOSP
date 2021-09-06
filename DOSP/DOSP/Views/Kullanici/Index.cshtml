@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Kullanıcılar";
+    ViewBag.nav = "aPanel";
+}
+
+@using DOSP.Models
+@model List<Kullanici>
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a>@ViewBag.Title</a>
+}
+
+@section scripts {
+    <script>
+        $("a#sil").click(function () {
+            var sonuc = confirm("Kullanıcı silinsin mi?");
+            if (sonuc) {
+                var id = $(this).data("kid");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Kullanici/Sil/" + id,
+                        success: function () {
+                            alert("Kullanıcı başarıyla silindi.");
+                            window.location.replace("/Kullanici");
+                        },
+                        error: function () {
+                            alert("Kullanıcı silinirken hata meydana geldi.");
+                        }
+                    }
+                );
+            }
+        });
+    </script>
+}
+
+<table style="width: 100%;">
+    <tr>
+        <td>ID</td>
+        <td>Rumuz</td>
+        <td>Adı/Soyadı</td>
+        <td>Kayıt Tarihi</td>
+        <td>Bakiye (TL)</td>
+        <td width="140px">Kontrol Tuşları</td>
+    </tr>
+    @foreach (Kullanici k in Model)
+    {
+        <tr>
+            <th>@k.KullaniciID</th>
+            <th>@k.rumuz</th>
+            <th>@k.adSoyad</th>
+            <th>@k.kayitTarihi.ToString("dd.MM.yyyy")</th>
+            <th>@k.bakiye</th>
+            <th>
+                <a href="/Kullanici/Guncelle/@k.KullaniciID" class="btn btn-green btn-left">Güncelle</a>
+                <a class="btn btn-red btn-right" id="sil" data-kid="@k.KullaniciID">Sil</a>
+            </th>
+        </tr>
+    }
+</table>

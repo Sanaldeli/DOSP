@@ -1,0 +1,50 @@
+﻿@using DOSP.Models
+
+@{
+    ViewBag.Title = "Oyun Ekle";
+    ViewBag.nav = "magaza";
+}
+
+@section nav {
+    <a href="/">Mağaza</a>
+    <a href="/Magaza/Liste">Oyun Listesi</a>
+    <a>@ViewBag.Title</a>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action="/Magaza/Ekle" class="form-content">
+    <label for="isim">İsim</label>
+    <input type="text" class="form-ctrl" placeholder="Oyunun ismi" name="OyunAdi" required />
+
+    <label for="Fiyat">Fiyat</label>
+    <input type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="OyunFiyati" required />
+
+    <label for="Açıklama">Açıklama</label>
+    <textarea class="form-ctrl" placeholder="Oyunun açıklaması" name="OyunAciklama"></textarea>
+
+    <label for="Çıkış Tarihi">Çıkış Tarihi</label>
+    <input type="date" class="form-ctrl" placeholder="Çıkış tarihi" name="CikisTarihi" />
+
+    <label for="Kategori">Kategori</label>
+    <select class="form-ctrl" name="KategoriID" required>
+        <option value="0" selected>Kategori seçiniz</option>
+        @foreach (Kategori k in ViewBag.ktg)
+        {
+            <option value="@k.KategoriID">@k.KategoriAdi</option>
+        }
+    </select>
+
+    <label for="Yapımcı">Yapımcı</label>
+    <select class="form-ctrl" name="YapimciID" required>
+        <option value="0" selected>Yapımcı seçiniz</option>
+        @foreach (Yapimci y in ViewBag.yapimci)
+        {
+            <option value="@y.YapimciID">@y.YapimciAdi</option>
+        }
+    </select>
+
+    <input type="submit" value="Oluştur" class="btn btn-green" />
+</form>
+
+<a style="font-size: 12px; line-height: 15px;" href="/Yapimci/Firma">< Listeye Dön</a>

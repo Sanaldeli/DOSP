@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Ticket Görüntüle";
+    ViewBag.nav = "destek";
+}
+
+@section nav {
+    <a href="/Destek">Destek</a>
+    <a>@ViewBag.Title</a>
+}
+
+@using DOSP.Models
+@model Ticket
+
+<ul style="list-style: none;">
+    <li>Ticket ID: @Model.TicketID</li>
+    <li>Kullanıcı: @Model.Kullanici.rumuz</li>
+    <li>Tarihi: @Model.TicketTarihi.ToString("dd.MM.yyyy H:mm")</li>
+    <li class="content-border"></li>
+    <li>Konusu: @Model.TicketBasligi</li>
+    <li>
+        Açıklama:
+        <br />
+        <p style="word-wrap: break-word;">@Model.TicketAciklama</p>
+    </li>
+</ul>

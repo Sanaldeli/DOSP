@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Ticket";
+    ViewBag.nav = "destek";
+}
+
+@section nav {
+    <a href="/Destek">Destek</a>
+    <a>@ViewBag.Title</a>
+}
+
+<h1>Ticket Oluştur</h1>
+
+<form action="/Destek/Ticket" method="post" role="form" class="form-content">
+    <label>Konu</label>
+    <input type="text" class="form-ctrl" placeholder="Konuyu yazınız" name="TicketBasligi" required />
+
+    <label>Açıklama</label>
+    <textarea class="form-ctrl" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz." name="TicketAciklama"></textarea>
+
+    <input type="submit" class="btn btn-yellow" value="Gönder" />
+</form>

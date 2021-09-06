@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+/*
+    'Poppins', sans-serif
+
+    Dark Byzantium: #59344F
+    Gold Crayola: #F3C677
+    Ultra Red: #F37793
+
+    Giriþ, sahip deðil: Gold Crayola #F3C677
+    Giriþ, sahip: #59a1d7
+    Giriþ yok: #a2c689
+*/
+
+/************************/
+/* DOST by Anýl Karaþah */
+/************************/
+
+:root {
+    --gap: 10px;
+    --darkbyzantium: #59344F;
+    --goldcrayola: #F3C677;
+    --ultrared: #F37793;
+    --lightblue: #59a1d7;
+    --lightgreen: #a2c689;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    border: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url("../Images/bgpt.png") repeat;
+    margin-bottom: 70px;
+}
+
+a {
+    color: #aaa;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #eee;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #333;
+    text-align: left;
+    padding: 8px;
+    font-weight: 700;
+}
+
+tr:nth-child(even) {
+    background-color: #333;
+}
+
+td {
+    border: 1px solid #333;
+    text-align: left;
+    padding: 8px;
+    font-weight: 400;
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+}
+
+.checkbox:last-of-type {
+    margin-bottom: 0;
+}
+
+    .checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 17px;
+    width: 17px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.checkbox input:checked ~ .checkmark {
+    background-color: #F37793;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox .checkmark:after {
+    top: 5px;
+    left: 5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #59344F;
+}
+
+.btn {
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 50px;
+    max-width: 120px;
+    user-select: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.btn-right {
+    float: right;
+}
+
+.btn-left {
+    float: left;
+}
+
+.btn-red {
+    background: #c73a3a;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-green {
+    background: #27781d;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-yellow {
+    background: #a68200;
+    color: #fff;
+    font-weight: bold;
+    margin: var(--gap) 0;
+}
+
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+    margin-top: 5px;
+}
+
+.form-ctrl {
+    padding: 5px;
+    width: 190px;
+    margin: 5px 0 15px 0;
+    border-radius: 5px;
+    background: #444;
+    color: #eee;
+}
+
+.form-ctrl::placeholder {
+    color: #aaa;
+}
+
+textarea.form-ctrl {
+    min-height: 70px;
+    max-width: 190px;
+    font-family: 'Roboto', sans-serif;
+}
+
+select.form-ctrl {
+    width: 200px;
+}

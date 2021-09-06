@@ -1,0 +1,48 @@
+﻿.page-header {
+    height: 40px;
+    width: 100%;
+    margin-top: 10px
+}
+
+    .page-header > h1 {
+        float: left;
+        width: fit-content;
+        line-height: 40px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+.page-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.page-left {
+    padding-right: var(--gap);
+    width: 620px;
+}
+
+.page-right {
+    width: 249px;
+    padding-left: var(--gap);
+    border-left: 1px solid #444;
+    font-size: 12px;
+    line-height: 14px;
+    color: #ccc;
+}
+
+    .page-right > img {
+        width: 250px;
+        margin-bottom: var(--gap);
+    }
+
+#gameprop {
+    line-height: 24px;
+    font-size: 16px;
+    color: #eee;
+}
+
+.ctrl {
+    padding: var(--gap) 0;
+}

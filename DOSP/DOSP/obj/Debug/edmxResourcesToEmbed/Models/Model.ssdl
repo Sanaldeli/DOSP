@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DOSPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="adminRapor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="RaporID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="adminTicket">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="TicketID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rumuz" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="adSoyad" Type="nvarchar" MaxLength="32" />
+    <Property Name="kayitTarihi" Type="date" />
+    <Property Name="bakiye" Type="int" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Rol" Type="nvarchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kutuphane">
+    <Key>
+      <PropertyRef Name="KutuphaneID" />
+    </Key>
+    <Property Name="KutuphaneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="OyunID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Oyun">
+    <Key>
+      <PropertyRef Name="OyunID" />
+    </Key>
+    <Property Name="OyunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OyunAdi" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="OyunFiyati" Type="int" Nullable="false" />
+    <Property Name="OyunAciklama" Type="nvarchar" MaxLength="512" />
+    <Property Name="YapimciID" Type="int" Nullable="false" />
+    <Property Name="KategoriID" Type="int" Nullable="false" />
+    <Property Name="CikisTarihi" Type="date" />
+  </EntityType>
+  <EntityType Name="Rapor">
+    <Key>
+      <PropertyRef Name="RaporID" />
+    </Key>
+    <Property Name="RaporID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriID" Type="int" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="RaporTarihi" Type="smalldatetime" />
+    <Property Name="aciklama" Type="nvarchar(max)" />
+    <Property Name="OyunID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RaporKategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Aciklama" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="SepetID" />
+    </Key>
+    <Property Name="SepetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sepetOyun">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SepetID" Type="int" Nullable="false" />
+    <Property Name="OyunID" Type="int" Nullable="false" />
+    <Property Name="odendi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="RolID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+    <Property Name="TicketTarihi" Type="smalldatetime" />
+    <Property Name="TicketBasligi" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TicketAciklama" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Yapimci">
+    <Key>
+      <PropertyRef Name="YapimciID" />
+    </Key>
+    <Property Name="YapimciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YapimciAdi" Type="nvarchar" MaxLength="255" />
+    <Property Name="KullaniciID" Type="int" />
+  </EntityType>
+  <Association Name="FK__adminRapo__Kulla__7DCDAAA2">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="adminRapor" Type="Self.adminRapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="adminRapor">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__adminRapo__Rapor__7CD98669">
+    <End Role="Rapor" Type="Self.Rapor" Multiplicity="1" />
+    <End Role="adminRapor" Type="Self.adminRapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rapor">
+        <PropertyRef Name="RaporID" />
+      </Principal>
+      <Dependent Role="adminRapor">
+        <PropertyRef Name="RaporID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__adminTick__Kulla__7FB5F314">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="adminTicket" Type="Self.adminTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="adminTicket">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__adminTick__Ticke__7EC1CEDB">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="adminTicket" Type="Self.adminTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketID" />
+      </Principal>
+      <Dependent Role="adminTicket">
+        <PropertyRef Name="TicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Kutuphane__Kulla__0A9D95DB">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Kutuphane" Type="Self.Kutuphane" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Kutuphane">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Kutuphane__OyunI__0169315C">
+    <End Role="Oyun" Type="Self.Oyun" Multiplicity="1" />
+    <End Role="Kutuphane" Type="Self.Kutuphane" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oyun">
+        <PropertyRef Name="OyunID" />
+      </Principal>
+      <Dependent Role="Kutuphane">
+        <PropertyRef Name="OyunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oyun__KategoriID__025D5595">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Oyun" Type="Self.Oyun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Oyun">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oyun__YapimciID__035179CE">
+    <End Role="Yapimci" Type="Self.Yapimci" Multiplicity="1" />
+    <End Role="Oyun" Type="Self.Oyun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yapimci">
+        <PropertyRef Name="YapimciID" />
+      </Principal>
+      <Dependent Role="Oyun">
+        <PropertyRef Name="YapimciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rapor__KategoriI__1F98B2C1">
+    <End Role="RaporKategori" Type="Self.RaporKategori" Multiplicity="1" />
+    <End Role="Rapor" Type="Self.Rapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RaporKategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Rapor">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rapor__Kullanici__208CD6FA">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Rapor" Type="Self.Rapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Rapor">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rapor__OyunID__04459E07">
+    <End Role="Oyun" Type="Self.Oyun" Multiplicity="1" />
+    <End Role="Rapor" Type="Self.Rapor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oyun">
+        <PropertyRef Name="OyunID" />
+      </Principal>
+      <Dependent Role="Rapor">
+        <PropertyRef Name="OyunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sepet__Kullanici__22751F6C">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sepetOyun__OyunI__0539C240">
+    <End Role="Oyun" Type="Self.Oyun" Multiplicity="1" />
+    <End Role="sepetOyun" Type="Self.sepetOyun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oyun">
+        <PropertyRef Name="OyunID" />
+      </Principal>
+      <Dependent Role="sepetOyun">
+        <PropertyRef Name="OyunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sepetOyun__Sepet__245D67DE">
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="1" />
+    <End Role="sepetOyun" Type="Self.sepetOyun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sepet">
+        <PropertyRef Name="SepetID" />
+      </Principal>
+      <Dependent Role="sepetOyun">
+        <PropertyRef Name="SepetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Table__Kullanici__5A4F643B">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Table" Type="Self.Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Table">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ticket__Kullanic__2A164134">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Yapimci__Kullani__6B79F03D">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+    <End Role="Yapimci" Type="Self.Yapimci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Yapimci">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DOSPModelStoreContainer">
+    <EntitySet Name="adminRapor" EntityType="Self.adminRapor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="adminTicket" EntityType="Self.adminTicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kutuphane" EntityType="Self.Kutuphane" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oyun" EntityType="Self.Oyun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rapor" EntityType="Self.Rapor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RaporKategori" EntityType="Self.RaporKategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sepetOyun" EntityType="Self.sepetOyun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yapimci" EntityType="Self.Yapimci" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__adminRapo__Kulla__7DCDAAA2" Association="Self.FK__adminRapo__Kulla__7DCDAAA2">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="adminRapor" EntitySet="adminRapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__adminRapo__Rapor__7CD98669" Association="Self.FK__adminRapo__Rapor__7CD98669">
+      <End Role="Rapor" EntitySet="Rapor" />
+      <End Role="adminRapor" EntitySet="adminRapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__adminTick__Kulla__7FB5F314" Association="Self.FK__adminTick__Kulla__7FB5F314">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="adminTicket" EntitySet="adminTicket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__adminTick__Ticke__7EC1CEDB" Association="Self.FK__adminTick__Ticke__7EC1CEDB">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="adminTicket" EntitySet="adminTicket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Kutuphane__Kulla__0A9D95DB" Association="Self.FK__Kutuphane__Kulla__0A9D95DB">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Kutuphane" EntitySet="Kutuphane" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Kutuphane__OyunI__0169315C" Association="Self.FK__Kutuphane__OyunI__0169315C">
+      <End Role="Oyun" EntitySet="Oyun" />
+      <End Role="Kutuphane" EntitySet="Kutuphane" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oyun__KategoriID__025D5595" Association="Self.FK__Oyun__KategoriID__025D5595">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Oyun" EntitySet="Oyun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oyun__YapimciID__035179CE" Association="Self.FK__Oyun__YapimciID__035179CE">
+      <End Role="Yapimci" EntitySet="Yapimci" />
+      <End Role="Oyun" EntitySet="Oyun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rapor__KategoriI__1F98B2C1" Association="Self.FK__Rapor__KategoriI__1F98B2C1">
+      <End Role="RaporKategori" EntitySet="RaporKategori" />
+      <End Role="Rapor" EntitySet="Rapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rapor__Kullanici__208CD6FA" Association="Self.FK__Rapor__Kullanici__208CD6FA">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Rapor" EntitySet="Rapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rapor__OyunID__04459E07" Association="Self.FK__Rapor__OyunID__04459E07">
+      <End Role="Oyun" EntitySet="Oyun" />
+      <End Role="Rapor" EntitySet="Rapor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sepet__Kullanici__22751F6C" Association="Self.FK__Sepet__Kullanici__22751F6C">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sepetOyun__OyunI__0539C240" Association="Self.FK__sepetOyun__OyunI__0539C240">
+      <End Role="Oyun" EntitySet="Oyun" />
+      <End Role="sepetOyun" EntitySet="sepetOyun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sepetOyun__Sepet__245D67DE" Association="Self.FK__sepetOyun__Sepet__245D67DE">
+      <End Role="Sepet" EntitySet="Sepet" />
+      <End Role="sepetOyun" EntitySet="sepetOyun" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Table__Kullanici__5A4F643B" Association="Self.FK__Table__Kullanici__5A4F643B">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Table" EntitySet="Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ticket__Kullanic__2A164134" Association="Self.FK__Ticket__Kullanic__2A164134">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Yapimci__Kullani__6B79F03D" Association="Self.FK__Yapimci__Kullani__6B79F03D">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Yapimci" EntitySet="Yapimci" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

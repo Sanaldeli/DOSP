@@ -1,0 +1,67 @@
+﻿@using DOSP.Models
+@model Oyun
+
+@{
+    ViewBag.Title = "Oyun Düzenle";
+    ViewBag.nav = "magaza";
+
+    Model m = new Model();
+    ViewBag.kullanici = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
+}
+
+@section nav {
+    <a href="/">Mağaza</a>
+    <a href="/Magaza/Liste">Oyun Listesi</a>
+    <a>@ViewBag.Title</a>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action="/Magaza/Duzenle" class="form-content">
+    <input type="hidden" name="OyunID" value="@Model.OyunID" />
+
+    <label for="isim">İsim</label>
+    <input type="text" class="form-ctrl" placeholder="Oyunun ismi" name="OyunAdi" value="@Model.OyunAdi" required />
+
+    <label for="Fiyat">Fiyat</label>
+    <input type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="OyunFiyati" value="@Model.OyunFiyati" required />
+
+    <label for="Açıklama">Açıklama</label>
+    <textarea class="form-ctrl" placeholder="Oyunun açıklaması" name="OyunAciklama">@Model.OyunAciklama</textarea>
+
+    <label for="Kategori">Kategori</label>
+    <select class="form-ctrl" name="KategoriID" required>
+        @foreach (Kategori k in ViewBag.ktg)
+        {
+            if (k.KategoriID == Model.KategoriID)
+            {
+                <option value="@k.KategoriID" selected>@k.KategoriAdi</option>
+            }
+            else
+            {
+                <option value="@k.KategoriID">@k.KategoriAdi</option>
+            }
+        }
+    </select>
+
+    <label for="Yapımcı">Yapımcı</label>
+    <select class="form-ctrl" name="YapimciID" required>
+        @foreach (Yapimci y in ViewBag.yapimci)
+        {
+            if (y.YapimciID == Model.YapimciID)
+            {
+                <option value="@y.YapimciID" selected>@y.YapimciAdi</option>
+            }
+            else
+            {
+                <option value="@y.YapimciID">@y.YapimciAdi</option>
+            }
+        }
+    </select>
+
+    <input type="submit" value="Kaydet" class="btn btn-green" />
+</form>
+
+<div style="font-size: 12px; line-height: 15px;">
+    @Html.ActionLink("< Listeye Dön", "Liste")
+</div>

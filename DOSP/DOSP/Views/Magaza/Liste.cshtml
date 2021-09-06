@@ -1,0 +1,61 @@
+﻿@using DOSP.Models
+@model List<Oyun>
+
+@{
+    ViewBag.Title = "Oyun Listesi";
+    ViewBag.nav = "magaza";
+}
+
+@section nav {
+    <a href="/">Mağaza</a>
+    <a>@ViewBag.Title</a>
+}
+
+@section scripts {
+    <script>
+        $("a#sil").click(function () {
+            var sonuc = confirm("Oyun silinsin mi?");
+            if (sonuc) {
+                var id = $(this).data("oid");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Magaza/Sil/" + id,
+                        success: function () {
+                            alert("Oyun başarıyla silindi.");
+                            window.location.replace("/Magaza/Liste");
+                        },
+                        error: function () {
+                            alert("Oyun silinirken hata meydana geldi.");
+                        }
+                    }
+                );
+            }
+        });
+    </script>
+}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>İsim</th>
+        <th>Fiyat (TL)</th>
+        <th>Yapımcı</th>
+        <th>Kategori</th>
+        <th width="140px">Kontrol Tuşları</th>
+    </tr>
+    @foreach (Oyun o in Model)
+    {
+        <tr>
+            <td>@o.OyunID</td>
+            <td>@o.OyunAdi</td>
+            <td>@o.OyunFiyati</td>
+            <td>@o.Yapimci.YapimciAdi</td>
+            <td>@o.Kategori.KategoriAdi</td>
+            <td>
+                <a href="/Magaza/Duzenle/@o.OyunID" class="btn btn-green btn-left">Güncelle</a>
+                <a class="btn btn-red btn-right" id="sil" data-oid="@o.OyunID">Sil</a>
+            </td>
+        </tr>
+    }
+</table>

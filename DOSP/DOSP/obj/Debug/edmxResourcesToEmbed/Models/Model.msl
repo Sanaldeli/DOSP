@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DOSPModelStoreContainer" CdmEntityContainer="DOSPEntities">
+    <EntitySetMapping Name="adminRapors">
+      <EntityTypeMapping TypeName="DOSPModel.adminRapor">
+        <MappingFragment StoreEntitySet="adminRapor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="RaporID" ColumnName="RaporID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="adminTickets">
+      <EntityTypeMapping TypeName="DOSPModel.adminTicket">
+        <MappingFragment StoreEntitySet="adminTicket">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategoris">
+      <EntityTypeMapping TypeName="DOSPModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicis">
+      <EntityTypeMapping TypeName="DOSPModel.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="rumuz" ColumnName="rumuz" />
+          <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+          <ScalarProperty Name="kayitTarihi" ColumnName="kayitTarihi" />
+          <ScalarProperty Name="bakiye" ColumnName="bakiye" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kutuphanes">
+      <EntityTypeMapping TypeName="DOSPModel.Kutuphane">
+        <MappingFragment StoreEntitySet="Kutuphane">
+          <ScalarProperty Name="KutuphaneID" ColumnName="KutuphaneID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="OyunID" ColumnName="OyunID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oyuns">
+      <EntityTypeMapping TypeName="DOSPModel.Oyun">
+        <MappingFragment StoreEntitySet="Oyun">
+          <ScalarProperty Name="OyunID" ColumnName="OyunID" />
+          <ScalarProperty Name="OyunAdi" ColumnName="OyunAdi" />
+          <ScalarProperty Name="OyunFiyati" ColumnName="OyunFiyati" />
+          <ScalarProperty Name="OyunAciklama" ColumnName="OyunAciklama" />
+          <ScalarProperty Name="YapimciID" ColumnName="YapimciID" />
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="CikisTarihi" ColumnName="CikisTarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rapors">
+      <EntityTypeMapping TypeName="DOSPModel.Rapor">
+        <MappingFragment StoreEntitySet="Rapor">
+          <ScalarProperty Name="RaporID" ColumnName="RaporID" />
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="RaporTarihi" ColumnName="RaporTarihi" />
+          <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+          <ScalarProperty Name="OyunID" ColumnName="OyunID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RaporKategoris">
+      <EntityTypeMapping TypeName="DOSPModel.RaporKategori">
+        <MappingFragment StoreEntitySet="RaporKategori">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sepets">
+      <EntityTypeMapping TypeName="DOSPModel.Sepet">
+        <MappingFragment StoreEntitySet="Sepet">
+          <ScalarProperty Name="SepetID" ColumnName="SepetID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sepetOyuns">
+      <EntityTypeMapping TypeName="DOSPModel.sepetOyun">
+        <MappingFragment StoreEntitySet="sepetOyun">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SepetID" ColumnName="SepetID" />
+          <ScalarProperty Name="OyunID" ColumnName="OyunID" />
+          <ScalarProperty Name="odendi" ColumnName="odendi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="DOSPModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="RolID" ColumnName="RolID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="DOSPModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="TicketTarihi" ColumnName="TicketTarihi" />
+          <ScalarProperty Name="TicketBasligi" ColumnName="TicketBasligi" />
+          <ScalarProperty Name="TicketAciklama" ColumnName="TicketAciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yapimcis">
+      <EntityTypeMapping TypeName="DOSPModel.Yapimci">
+        <MappingFragment StoreEntitySet="Yapimci">
+          <ScalarProperty Name="YapimciID" ColumnName="YapimciID" />
+          <ScalarProperty Name="YapimciAdi" ColumnName="YapimciAdi" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

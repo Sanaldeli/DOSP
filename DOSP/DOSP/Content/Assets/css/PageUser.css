@@ -1,0 +1,99 @@
+﻿.user-header {
+    width: calc(100% - 2*var(--gap));
+    height: 110px;
+    padding: var(--gap);
+    background: #333;
+    border-radius: var(--gap);
+}
+
+img.user-img {
+    width: 100px;
+    height: 100px;
+    border: 5px solid var(--goldcrayola);
+    border-radius: 5px;
+    float: left;
+    margin-right: var(--gap)
+}
+
+h1.username {
+    line-height: 25px;
+    font-size: 24px;
+    font-weight: 700;
+    float: left;
+    width: fit-content;
+}
+
+.user-header > h2 {
+    line-height: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #aaa;
+}
+
+h2#regdate {
+    float: right;
+}
+
+h2#realname {
+    width: fit-content;
+    height: 15px;
+    float: left;
+}
+
+.user-gamelist {
+    margin-top: var(--gap);
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-auto-rows: 105px;
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+.container-hasGames {
+    height: 30px;
+    margin-top: var(--gap);
+}
+
+    .container-hasGames > h1 {
+        line-height: 30px;
+        font-size: 16px;
+        font-weight: 700;
+        width: fit-content;
+        float: left;
+    }
+
+    .container-hasGames > #border {
+        display: block;
+        height: 1px;
+        background: #fff2;
+        margin: 14px 0 15px var(--gap);
+        float: right;
+    }
+
+.user-game {
+    justify-self: stretch;
+}
+
+    .user-game > img {
+        width: 162px;
+    }
+
+    .user-game > a {
+        line-height: 30px;
+        font-size: 16px;
+        color: #eee;
+    }
+
+.user-limit {
+    justify-self: stretch;
+    background: #181818;
+    width: 162px;
+}
+
+    .user-limit > h1 {
+        line-height: 25px;
+        padding: 40px 0;
+        font-size: 20px;
+        text-align: center;
+        color: #aaa;
+    }

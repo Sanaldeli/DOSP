@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Kütüphane";
+    ViewBag.nav = "kutuphane";
+}
+
+@using DOSP.Models
+@model List<Kutuphane>
+
+@section nav {
+    <a>@ViewBag.Title</a>
+}
+
+@HttpContext.Current.User.Identity.Name'nin Kütüphanesi
+
+@foreach (Kutuphane x in Model)
+{
+    <div class="cart-item">
+        <img src="~/Content/Assets/Images/gcont/@x.OyunID/cover.jpg" />
+        <a href="~/Magaza/Oyun/@x.OyunID" class="name">@x.Oyun.OyunAdi</a>
+    </div>
+}

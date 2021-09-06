@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Giriş Yap";
+    ViewBag.nav = "index";
+}
+
+@model DOSP.Models.Kullanici
+
+@section nav {
+    <a>@ViewBag.Title</a>
+}
+
+@using (Html.BeginForm("Index", "Giris", new { ReturnUrl = Request.QueryString["ReturnUrl"], FormMethod.Post }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    if (ViewBag.error != null)
+    {
+        <p style="color: #F3C677; font-size: 12px; line-height: 14px; margin-bottom: 5px">@ViewBag.error</p>
+    }
+
+    @Html.TextBoxFor(x => x.rumuz, new { @class = "form-ctrl", placeholder = "Kullanıcı adınızı giriniz", autofocus = "autofocus" })
+    <br />
+    @Html.PasswordFor(x => x.sifre, new { @class = "form-ctrl", placeholder = "Şifrenizi giriniz" })
+    <br />
+    <input type="submit" class="btn btn-green" value="Giriş Yap" />
+}
+
+<p>Bir hesabınız yok mu? <a href="/Giris/Kayit">Kayıt olun.</a></p>

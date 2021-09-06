@@ -1,0 +1,193 @@
+.header {
+    width: 100%;
+    height: fit-content;
+}
+
+.header-box {
+    width: 920px;
+    margin: auto;
+}
+
+.header-top {
+    height: 105px;
+    background: #181818;
+}
+
+a.header-logobox {
+    cursor: pointer;
+    float: left;
+    width: 156px;
+    height: 55px;
+    background: url("../Images/logo.png") no-repeat;
+    margin: 25px;
+}
+
+    a.header-logobox:hover {
+        background-position-y: -55px;
+    }
+
+.header-profile {
+    float: right;
+    width: fit-content;
+    height: 55px;
+    margin: 25px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    flex-basis: auto;
+}
+
+.header-pic {
+    float: right;
+    border: 3px solid var(--goldcrayola);
+    width: 49px;
+    height: 49px;
+}
+
+    .header-pic > img {
+        width: 49px;
+        height: 49px;
+    }
+
+.header-sign {
+    display: flex;
+    font-size: 14px;
+    line-height: 15px;
+    flex-direction: row;
+    margin: 45px 25px;
+    float: right;
+}
+
+.sign-border {
+    margin: 0 5px;
+    width: 1px;
+    height: 15px;
+    background: #aaa;
+}
+
+.header-holder {
+    padding-right: var(--gap);
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header-username {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+a#profile-linker {
+    color: #fff;
+}
+
+    a#profile-linker:hover {
+        text-shadow: 0 0 4px;
+    }
+
+.header-basket {
+    width: fit-content;
+    height: 20px;
+}
+
+    .header-basket > a {
+        color: #000;
+        line-height: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        float: left;
+        background: var(--goldcrayola);
+        padding: 0 5px;
+        user-select: none;
+    }
+
+        .header-basket > a:hover {
+            color: #000;
+        }
+
+    .header-basket > span {
+        margin-left: 5px;
+    }
+
+.header-wallet {
+    float: left;
+    border: 1px solid #F3C677;
+    line-height: 18px;
+    width: fit-content;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 5px;
+    color: #aaa;
+}
+
+    .header-wallet::after {
+        content: "TL";
+    }
+
+.header-log {
+    font-size: 10px;
+    line-height: 15px;
+}
+
+.header-logo > a {
+    color: #fff;
+    padding-left: 20px;
+}
+
+.header-bottom {
+    height: 36px;
+    background: #333;
+}
+
+.header-box > .border {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, rgba(89,52,79,1) 0%, rgba(150,108,150,1) 15%, rgba(107,53,91,1) 35%, rgba(187,162,119,1) 45%, rgba(243,198,119,1) 60%, rgba(171,126,47,1) 75%, rgba(242,186,88,1) 100%);
+}
+
+.header-nav {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 36px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+    .header-nav > a {
+        padding: 0 10px;
+        line-height: 36px;
+    }
+
+        .header-nav > a:hover {
+            background: #383838;
+            color: #ccc;
+        }
+
+        .header-nav > a.aktif {
+            background: linear-gradient(60deg, var(--goldcrayola) 0%, var(--ultrared) 100%);
+            color: #59344F;
+            font-weight: 700;
+        }
+
+.header-search {
+    float: right;
+    padding: 4px;
+}
+
+    .header-search input[type="text"] {
+        padding: 4px;
+    }
+
+    .header-search button {
+        float: right;
+        border: none;
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+        background: #ccc;
+    }

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Rapor";
+    ViewBag.nav = "destek";
+}
+
+@using DOSP.Models
+@model List<RaporKategori>
+
+@section nav {
+    <a href="/Destek">Destek</a>
+    <a>Rapor (@ViewBag.Oyun.OyunAdi)</a>
+}
+
+<h1>Oyunu Raporla</h1>
+
+<form action="/Destek/Rapor" method="post" class="form-content" role="form">
+    <input type="hidden" name="OyunID" value="@ViewBag.Oyun.OyunID" />
+
+    <label>Lütfen konuyu seçiniz</label>
+    <select class="form-ctrl" name="KategoriID" required>
+        @foreach (RaporKategori x in Model)
+        {
+            <option value="@x.KategoriID" title="@x.Aciklama">@x.KategoriAdi</option>
+        }
+    </select>
+
+    <label>Açıklama</label>
+    <textarea class="form-ctrl" name="aciklama" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz."></textarea>
+
+    <input type="submit" class="btn btn-yellow" value="Gönder" />
+
+</form>
+
+<a href="/Magaza/Oyun/@ViewBag.Oyun.OyunID" style="font-size: 12px; line-height: 15px;">< Oyuna Dön</a>

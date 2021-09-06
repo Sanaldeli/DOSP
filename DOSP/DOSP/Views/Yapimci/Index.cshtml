@@ -1,0 +1,63 @@
+﻿@using DOSP.Models
+@model List<Yapimci>
+
+@{
+    ViewBag.Title = "Yapımcı Listesi";
+    ViewBag.nav = "aPanel";
+}
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a>@ViewBag.Title</a>
+}
+
+@section scripts {
+    <script>
+        $("a#sil").click(function () {
+            var sonuc = confirm("Yapımcının silinmesini istediğinize emin misiniz?");
+
+            if (sonuc) {
+                var id = $(this).data("yapid");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Yapimci/Sil/" + id,
+                        success: function () {
+                            alert("Yapımcı başarıyla silindi.");
+                            window.location.replace("/Yapimci");
+                        },
+                        error: function () {
+                            alert("Yapımcı silinirken hata meydana geldi.");
+                        }
+                    }
+                );
+            }
+        });
+    </script>
+}
+
+<a class="btn btn-yellow btn-right" href="/Yapimci/Ekle" style="margin-top: 0">Yapımcı Ekle</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Firma Adı</th>
+        <th>Kullanıcı</th>
+        <th width="140px">Kontrol Tuşları</th>
+    </tr>
+    @foreach (Yapimci y in Model)
+    {
+        <tr>
+            <td>@y.YapimciID</td>
+            <td><a href="/Yapimci/Firma/@y.YapimciID">@y.YapimciAdi</a></td>
+            <td><a href="/Profil/Index/@y.KullaniciID">@y.Kullanici.rumuz</a></td>
+            <td>
+                <a href="/Yapimci/Guncelle/@y.YapimciID" class="btn btn-green btn-left">Güncelle</a>
+                @if (User.IsInRole("A"))
+                {
+                    <a class="btn btn-red btn-right" id="sil" data-yapid="@y.YapimciID">Sil</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

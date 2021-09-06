@@ -1,0 +1,134 @@
+﻿@{
+    Layout = null;
+
+    if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        Model m = new Model();
+        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
+        Sepet s = m.Sepets.FirstOrDefault(x => x.KullaniciID == k.KullaniciID);
+        ViewBag.id = k.KullaniciID;
+        ViewBag.rumuz = k.rumuz;
+        ViewBag.bakiye = k.bakiye;
+        int sepetSayisi = m.SepetOyuns.Where(x => x.SepetID == s.SepetID && x.odendi == false).ToList().Count;
+        if (sepetSayisi == 0)
+        {
+            ViewBag.sepet = null;
+        }
+        else
+        {
+            ViewBag.sepet = "(" + sepetSayisi + ")";
+        }
+
+        if (User.IsInRole("Y"))
+        {
+            ViewBag.yapimci = m.Yapimcis.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name).YapimciAdi;
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - DOST</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Styles.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Header.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Content.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Footer.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageStore.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageGame.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageCart.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageUser.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageSupport.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageAdmin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @RenderSection("head", false)
+</head>
+<body>
+    @RenderSection("body", false)
+    <div class="header">
+        <div class="header-box">
+            <div class="border"></div>
+            <div class="header-top">
+                <a href="/" class="header-logobox"></a>
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <div class="header-profile">
+                        <div class="header-holder">
+                            <div class="header-username"><a id="profile-linker" href="/Profil" title="Profiline git">@ViewBag.rumuz</a></div>
+                            <div class="header-basket">
+                                <a href="/Sepet" title="Sepete git">
+                                    <i class="fas fa-shopping-basket"></i>
+                                    <span>Sepet @ViewBag.sepet</span>
+                                </a>
+                                <div class="header-wallet">@ViewBag.bakiye</div>
+                            </div>
+                            <div class="header-log"><a id="logging" href="/Giris/Cikis">Çıkış yap</a></div>
+                        </div>
+                        <div class="header-pic"><img src="~/Content/Assets/Images/default-pp.jpg" /></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="header-sign">
+                        <a href="/Giris">Giriş Yap</a>
+                        <div class="sign-border"></div>
+                        <a href="/Giris/Kayit">Kayıt Ol</a>
+                    </div>
+                }
+
+            </div>
+            <div class="header-bottom">
+                <div class="header-nav">
+                    <a id="magaza" href="/">Mağaza</a>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <a id="profil" href="/Profil">Profil</a>
+                        <a id="kutuphane" href="/Kutuphane">Kütüphane</a>
+                        <a id="destek" href="/Destek">Destek</a>
+                        if (User.IsInRole("A"))
+                        {
+                            <a id="aPanel" href="/AdminPaneli">Admin Paneli</a>
+                        }
+                        else if (User.IsInRole("Y"))
+                        {
+
+                            <a id="yapimci" href="/Yapimci/Firma">@ViewBag.yapimci</a>
+                        }
+                    }
+                </div>
+                <form class="header-search" action="/Magaza/Ara" role="form">
+                    <input type="text" placeholder="Oyun Ara" name="ara" required />
+                    <button type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-main">
+            <div class="content-nav">
+                @RenderSection("nav", false)
+            </div>
+            <div class="content-border"></div>
+
+            @RenderBody()
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-holder">
+            <a href="/" class="footer-logobox"></a>
+            <div class="footer-creator">DOST :: Anıl Karaşah</div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/Content/Assets/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/Assets/jquery/jquery.easing.1.3-min.js"></script>
+    <script>
+        $("#@ViewBag.Nav").addClass("aktif");
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

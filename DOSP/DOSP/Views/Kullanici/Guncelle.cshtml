@@ -1,0 +1,58 @@
+﻿@using DOSP.Models
+@model Kullanici
+
+@{
+    ViewBag.Title = "Kullanıcı Güncelle";
+    ViewBag.nav = "aPanel";
+}
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a href="/Kullanici">Kullanıcı</a>
+    <a>@ViewBag.Title (@Model.rumuz)</a>
+}
+
+@functions {
+    bool inRole(char role)
+    {
+        Model m = new Model();
+        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.KullaniciID == Model.KullaniciID);
+        if (k.Rol != null && k.Rol.Contains(role))
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action="/Kullanici/Guncelle" class="form-content">
+    <input type="hidden" name="KullaniciID" value="@Model.KullaniciID" />
+    <label for="rumuz">Nickname</label>
+    <input type="text" class="form-ctrl" placeholder="Nickname" name="rumuz" value="@Model.rumuz" required />
+
+    <label for="adSoyad">İsim Soyisim</label>
+    <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="adSoyad" value="@Model.adSoyad" required />
+
+    <label for="bakiye">Bakiye</label>
+    <input type="number" class="form-ctrl" placeholder="Bakiye" name="bakiye" value="@Model.bakiye" />
+
+    <label for="Şifre">Şifre</label>
+    <input type="text" class="form-ctrl" placeholder="Kullanıcı şifresi" name="sifre" value="@Model.sifre" />
+    <div style="float: left;">
+        @Html.CheckBox("yapimci", inRole('Y'))
+        <label for="yapimci" style="line-height: 15px; font-size: 12px; width: fit-content">Yapımcı</label>
+    </div>
+
+    <div style="float: right;">
+        @Html.CheckBox("admin", inRole('A'))
+        <label for="admin" style="line-height: 15px; font-size: 12px; width: fit-content">Admin</label>
+    </div>
+    <br />
+    <input type="submit" value="Kaydet" class="btn btn-green" />
+</form>
+
+<div style="font-size: 12px; line-height: 15px;">
+    <a href="/Kullanici">< Listeye Dön</a>
+</div>

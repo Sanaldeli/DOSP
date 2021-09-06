@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fc5cdbe68324a68a3e7b51841d56895" Name="Diagram1">
+        <EntityTypeShape EntityType="DOSPModel.adminRapor" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.adminTicket" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Kategori" Width="1.5" PointX="3" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Kullanici" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Kutuphane" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Oyun" Width="1.5" PointX="5.25" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Rapor" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.RaporKategori" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Sepet" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.sepetOyun" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Table" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Ticket" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Yapimci" Width="1.5" PointX="3" PointY="28.875" IsExpanded="true" />
+        <AssociationConnector Association="DOSPModel.FK__adminRapo__Kulla__7DCDAAA2" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__adminRapo__Rapor__7CD98669" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__adminTick__Kulla__7FB5F314" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__adminTick__Ticke__7EC1CEDB" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Oyun__KategoriID__025D5595" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Kutuphane__Kulla__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Rapor__Kullanici__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Sepet__Kullanici__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Table__Kullanici__5A4F643B" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Ticket__Kullanic__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Yapimci__Kullani__6B79F03D" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Kutuphane__OyunI__0169315C" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Oyun__YapimciID__035179CE" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Rapor__OyunID__04459E07" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__sepetOyun__OyunI__0539C240" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__Rapor__KategoriI__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="DOSPModel.FK__sepetOyun__Sepet__245D67DE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

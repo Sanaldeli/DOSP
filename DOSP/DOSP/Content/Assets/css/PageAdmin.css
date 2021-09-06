@@ -1,0 +1,50 @@
+﻿.admin-cont {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+    .admin-cont > a {
+        border-radius: var(--gap);
+        background: #ccc;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .admin-cont > a > h1 {
+        color: var(--darkbyzantium);
+        line-height: 150px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .admin-cont > a > i {
+        position: relative;
+        bottom: var(--gap);
+        color: #F3779344;
+        font-size: 50px;
+        transform: rotateZ(20deg);
+    }
+
+    .admin-cont > a:hover > i {
+        color: #F37793;
+    }
+
+.ades {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.akat {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.ayap {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.akul {
+    grid-area: 2 / 2 / 3 / 3;
+}

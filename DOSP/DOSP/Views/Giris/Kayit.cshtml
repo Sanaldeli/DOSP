@@ -1,0 +1,33 @@
+﻿@using DOSP.Models
+@model Kullanici
+
+@{
+    ViewBag.Title = "Kayıt Ol";
+    ViewBag.nav = "index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Kayit", "Giris", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-content">
+        <label for="rumuz">Kullanıcı Adı</label>
+        @Html.TextBoxFor(m => m.rumuz, new { @class = "form-ctrl", @placeholder = "Kullanıcı Adı" })
+        @if (ViewBag.error != null)
+        {
+            <p>@ViewBag.error</p>
+        }
+
+        <label for="adSoyad">İsim Soyisim</label>
+        @Html.TextBoxFor(m => m.adSoyad, new { @class = "form-ctrl", @placeholder = "İsim Soyisim" })
+
+        <label for="sifre">Şifre</label>
+        @Html.PasswordFor(m => m.sifre, new { @class = "form-ctrl", @placeholder = "Şifre" })
+
+        <input type="submit" class="btn btn-yellow" value="Kayıt Ol" />
+    </div>
+}
+
+<p>Bir hesabınız var mı? <a href="/Giris">Giriş yapın.</a></p>

@@ -1,0 +1,86 @@
+﻿@using DOSP.Models
+@model List<sepetOyun>
+
+@{
+    ViewBag.Title = "Sepet";
+    ViewBag.nav = "profil";
+}
+
+@section nav {
+    <a>@ViewBag.Title</a>
+}
+
+@section scripts {
+    <script>
+        $("a#remove").click(function () {
+            var sonuc = confirm("Sepetten kaldırılsın mı?");
+            if (sonuc) {
+                var id = $(this).data("sid");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Sepet/Kaldir/" + id,
+                        success: function () {
+                            window.location.replace("/Sepet");
+                        },
+                        error: function () {
+                            alert("Sepetten kaldırılırken hata oluştu.");
+                        }
+                    }
+                );
+            }
+        });
+
+        $("a.cart-purchase").click(function () {
+            var id = @ViewBag.sid;
+            var toplam = $(this).data("toplam");
+            var bakiye = @ViewBag.bakiye;
+
+            if (bakiye < toplam) {
+                alert("Bakiyeniz satın alım için yetersizdir.");
+            } else {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Sepet/SatinAl/" + id,
+                        success: function () {
+                            alert("Satın alım başarılı. Hayırlı olsun!");
+                            window.location.replace("/Kutuphane");
+                        },
+                        error: function () {
+                            alert("Satın alımda bir hata yaşandı.");
+                        }
+                    }
+                );
+            }
+       });
+    </script>
+}
+
+<h2>Sepetin</h2>
+@if (Model.Count != 0)
+{
+    int toplam = 0;
+    foreach (var s in Model)
+    {
+        <div class="cart-item">
+            <img src="~/Content/Assets/Images/gcont/@s.OyunID/cover.jpg" />
+            <a href="~/Magaza/Oyun/@s.OyunID" class="name">@s.Oyun.OyunAdi</a>
+            <div class="cart-price">
+                <a class="fas fa-times" id="remove" data-sid="@s.ID" title="Sepetten Kaldır"></a>
+                <h1>@s.Oyun.OyunFiyati</h1>
+            </div>
+            @{ toplam += s.Oyun.OyunFiyati; }
+        </div>
+    }
+    <div class="cart-complete">
+        <div class="cart-total">
+            <h1>Tutar: @toplam</h1>
+        </div>
+        <a class="cart-purchase" data-toplam="@toplam">Satın Al</a>
+    </div>
+}
+else
+{
+    <p>Sepetiniz boş gözüküyor. Oyunlara göz atmak için <a href="/Magaza/Giris">Mağaza</a> sayfasını kullanabilirsiniz.</p>
+}

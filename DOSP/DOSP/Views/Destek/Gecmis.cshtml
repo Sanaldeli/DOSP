@@ -1,0 +1,62 @@
+﻿@using DOSP.Models
+@model List<Ticket>
+
+@{
+    ViewBag.Title = "Geçmiş Ticketlar";
+    ViewBag.nav = "destek";
+}
+
+@section nav {
+    <a href="/Destek">Destek</a>
+    <a>@ViewBag.Title</a>
+}
+
+@if (ViewBag.Ticket.Count > 0)
+{
+    <table>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Kullanıcı</th>
+            <th>Konu</th>
+            <th>Tarih</th>
+        </tr>
+        @foreach (Ticket x in ViewBag.Ticket)
+        {
+            <tr>
+                <td><a href="/Destek/TicketGoruntule/@x.TicketID">@x.TicketID</a></td>
+                <td>@x.Kullanici.rumuz</td>
+                <td>@x.TicketBasligi</td>
+                <td>@x.TicketTarihi.ToString("dd.MM.yyyy H:mm")</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>Herhangi bir Ticket'ınız bulunmamaktadır.</h3>
+}
+<br />
+@if (ViewBag.Rapor.Count > 0)
+{
+    <table>
+        <tr>
+            <th>Rapor ID</th>
+            <th>Rapor Türü</th>
+            <th>Kullanıcı</th>
+            <th>Rapor Tarihi</th>
+        </tr>
+        @foreach (Rapor x in ViewBag.Rapor)
+        {
+            <tr>
+                <td><a href="/Destek/RaporGoruntule/@x.RaporID">@x.RaporID</a></td>
+                <td>@x.RaporKategori.KategoriAdi</td>
+                <td>@x.Kullanici.rumuz</td>
+                <td>@x.RaporTarihi.ToString("dd.MM.yyyy H:mm")</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>Herhangi bir raporunuz bulunmamaktadır.</h3>
+}

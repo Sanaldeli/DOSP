@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Admin Destek Paneli";
+    ViewBag.nav = "aPanel";
+}
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a>@ViewBag.Title</a>
+}
+
+<a class="sup-cont report" href="/AdminDestek/ARapor">
+    <h1>Rapor</h1>
+    <i class="fas fa-flag"></i>
+</a>
+<a class="sup-cont ticket" href="/AdminDestek/ATicket">
+    <h1>Ticket</h1>
+    <i class="fas fa-ticket-alt"></i>
+</a>

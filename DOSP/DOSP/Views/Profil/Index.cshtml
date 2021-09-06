@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Profil";
+    ViewBag.nav = "profil";
+    int oyunSayisi = ViewBag.kutuphane.Count;
+    int i = 0;
+}
+
+@using DOSP.Models
+@model Kullanici
+
+@section nav {
+    <a>@Model.rumuz</a>
+}
+
+@section scripts {
+    <script>
+        var h1width = $(".container-hasGames>h1").width() + 11;
+        $(".container-hasGames>#border").css("width", "calc(100% - " + h1width + "px)");
+    </script>
+}
+
+<div class="user-header">
+    <img class="user-img" src="~/Content/Assets/Images/default-pp.jpg" />
+    <h2 id="regdate">@Model.kayitTarihi.ToString("dd MMMM yyyy")</h2>
+    <h1 class="username">@Model.rumuz</h1>
+    <br />
+    <h2 id="realname">@Model.adSoyad</h2>
+</div>
+
+<div class="container-hasGames">
+    <h1>@oyunSayisi Oyun Sahibi</h1>
+    <div id="border"></div>
+</div>
+<div class="user-gamelist">
+    @foreach (Kutuphane x in ViewBag.kutuphane)
+    {
+        <div class="user-game">
+            <img src="~/Content/Assets/Images/gcont/@x.OyunID/cover.jpg" />
+            <a href="/Magaza/Oyun/@x.OyunID">@x.Oyun.OyunAdi</a>
+        </div>
+        if (++i >= 4)
+        {
+            <div class="user-limit">
+                <h1>+@(oyunSayisi-4) OYUN</h1>
+            </div>
+            break;
+        }
+    }
+</div>

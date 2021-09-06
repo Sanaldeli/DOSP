@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Rapor";
+    ViewBag.nav = "aPanel";
+}
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a href="/AdminDestek">Destek</a>
+    <a>@ViewBag.Title</a>
+}
+
+@using DOSP.Models
+@model List<Rapor>
+
+<table>
+    <tr>
+        <th>Rapor ID</th>
+        <th>Kategori</th>
+        <th>Kullanıcı ID</th>
+        <th>Rumuz</th>
+        <th>Oyun</th>
+        <th>Tarih</th>
+    </tr>
+    @foreach (Rapor x in Model)
+    {
+        <tr>
+            <td><a href="/AdminDestek/ARaporGoruntule/@x.RaporID">@x.RaporID</a></td>
+            <td>@x.RaporKategori.KategoriAdi</td>
+            <td>@x.KullaniciID</td>
+            <td>@x.Kullanici.rumuz</td>
+            <td>@x.Oyun.OyunAdi</td>
+            <td>@x.RaporTarihi.ToString("dd.MM.yyyy H:mm")</td>
+        </tr>
+    }
+</table>

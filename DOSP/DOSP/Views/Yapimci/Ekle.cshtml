@@ -1,0 +1,31 @@
+﻿@using DOSP.Models
+@model Yapimci
+
+@{
+    ViewBag.Title = "Yapımcı Ekle";
+    ViewBag.nav = "aPanel";
+}
+
+@section nav {
+    <a href="/AdminPaneli">Admin Paneli</a>
+    <a href="/Yapimci">Yapımcılar</a>
+    <a>@ViewBag.Title</a>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form action="/Yapimci/Ekle" method="post" role="form" class="form-content">
+
+    <input class="form-ctrl" value="" type="text" name="YapimciAdi" placeholder="Firma adını giriniz" required />
+
+    <select class="form-ctrl" name="KullaniciID" required>
+        <option value="0" selected>Kullanıcı seçiniz</option>
+        @foreach (Kullanici k in ViewBag.kullanici)
+        {
+            <option value="@k.KullaniciID">@k.rumuz</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-yellow">Kaydet</button>
+</form>
+
+<a href="/Yapimci" style="font-size: 12px; line-height: 15px;">< Listeye Dön</a>

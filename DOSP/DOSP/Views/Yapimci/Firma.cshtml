@@ -1,0 +1,94 @@
+﻿@using DOSP.Models
+@model Yapimci
+
+@{
+    Model m = new Model();
+
+    if (User.IsInRole("Y"))
+    {
+        Yapimci y = m.Yapimcis.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name);
+        if (y.YapimciID == Model.YapimciID)
+        {
+            ViewBag.yapimci = true;
+            ViewBag.nav = "yapimci";
+        }
+        else
+        {
+            ViewBag.yapimci = false;
+            ViewBag.nav = "magaza";
+        }
+    }
+    ViewBag.Title = Model.YapimciAdi;
+}
+
+@section nav {
+    @if (!ViewBag.yapimci)
+    {
+        <a href="/">Mağaza</a>
+    }
+    <a>@Model.YapimciAdi</a>
+}
+
+@section scripts {
+    <script>
+        $("a#sil").click(function () {
+            var sonuc = confirm("Oyun silinsin mi?");
+            if (sonuc) {
+                var id = $(this).data("oid");
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Magaza/Sil/" + id,
+                        success: function () {
+                            alert("Oyun başarıyla silindi.");
+                            window.location.replace("/Magaza/Liste");
+                        },
+                        error: function () {
+                            alert("Oyun silinirken hata meydana geldi.");
+                        }
+                    }
+                );
+            }
+        });
+    </script>
+}
+
+<h2 style="text-align: center;">@Model.YapimciAdi</h2>
+
+@if (ViewBag.yapimci)
+{
+    <a class="btn btn-yellow btn-right" href="/Magaza/Ekle" style="margin-top: 0">Oyun Ekle</a>
+}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Adı</th>
+        <th>Fiyat (TL)</th>
+        <th>Kategori</th>
+        <th>Çıkış Tarihi</th>
+        @if (ViewBag.yapimci)
+        {
+            <th width="140px">Kontrol Tuşları</th>
+        }
+    </tr>
+    @foreach (Oyun x in ViewBag.oyun)
+    {
+        <tr>
+            <td>@x.OyunID</td>
+            <td><a href="/Magaza/Oyun/@x.OyunID">@x.OyunAdi</a></td>
+            <td>@x.OyunFiyati</td>
+            <td>@x.Kategori.KategoriAdi</td>
+            <td>@x.CikisTarihi.ToString("dd.MM.yyyy")</td>
+            @if (ViewBag.yapimci)
+            {
+                <td>
+                    <a href="/Magaza/Duzenle/@x.OyunID" class="btn btn-green btn-left">Güncelle</a>
+                    <a class="btn btn-red btn-right" id="sil" data-oid="@x.OyunID">Sil</a>
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+

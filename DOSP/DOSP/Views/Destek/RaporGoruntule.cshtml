@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Rapor Görüntüle";
+    ViewBag.nav = "destek";
+}
+
+@section nav {
+    <a href="/Destek">Destek</a>
+    <a>@ViewBag.Title</a>
+}
+
+@model DOSP.Models.Rapor
+
+<ul style="list-style: none;">
+    <li>Rapor ID: @Model.RaporID</li>
+    <li>Kullanıcı: @Model.Kullanici.rumuz</li>
+    <li>Tarihi: @Model.RaporTarihi.ToString("dd.MM.yyyy H:mm")</li>
+    <li>Oyun: <a href="/Magaza/Oyun/@Model.OyunID">@Model.Oyun.OyunAdi</a></li>
+    <li class="content-border"></li>
+    <li>
+        Açıklama:
+        <br />
+        <p style="word-wrap: break-word;">@Model.aciklama</p>
+    </li>
+</ul>
