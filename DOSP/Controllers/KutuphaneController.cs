@@ -9,13 +9,13 @@ namespace DOSP.Controllers
 {
     public class KutuphaneController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize]
         public ActionResult Index()
         {
-            Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.User.Identity.Name);
-            List<Kutuphane> l = m.Kutuphanes.Where(x => x.KullaniciID == k.KullaniciID).ToList();
+            User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
+            List<Library> l = _dc.Libraries.Where(x => x.UserID == k.ID).ToList();
             return View(l);
         }
     }

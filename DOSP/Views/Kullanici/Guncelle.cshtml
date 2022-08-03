@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model Kullanici
+@model User
 
 @{
     ViewBag.Title = "Kullanıcı Güncelle";
@@ -9,15 +9,15 @@
 @section nav {
     <a href="/AdminPaneli">Admin Paneli</a>
     <a href="/Kullanici">Kullanıcı</a>
-    <a>@ViewBag.Title (@Model.rumuz)</a>
+    <a>@ViewBag.Title (@Model.Nickname)</a>
 }
 
 @functions {
     bool inRole(char role)
     {
-        Model m = new Model();
-        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.KullaniciID == Model.KullaniciID);
-        if (k.Rol != null && k.Rol.Contains(role))
+        DataContext dc = new DataContext();
+        User k = dc.Users.FirstOrDefault(x => x.ID == Model.ID);
+        if (k.Role != null && k.Role.Contains(role))
         {
             return true;
         }
@@ -28,18 +28,19 @@
 <h2>@ViewBag.Title</h2>
 
 <form method="post" action="/Kullanici/Guncelle" class="form-content">
-    <input type="hidden" name="KullaniciID" value="@Model.KullaniciID" />
+    <input type="hidden" name="ID" value="@Model.ID" />
+
     <label for="rumuz">Nickname</label>
-    <input type="text" class="form-ctrl" placeholder="Nickname" name="rumuz" value="@Model.rumuz" required />
+    <input type="text" class="form-ctrl" placeholder="Rumuz" name="Nickname" value="@Model.Nickname" required />
 
     <label for="adSoyad">İsim Soyisim</label>
-    <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="adSoyad" value="@Model.adSoyad" required />
+    <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
 
     <label for="bakiye">Bakiye</label>
-    <input type="number" class="form-ctrl" placeholder="Bakiye" name="bakiye" value="@Model.bakiye" />
+    <input type="number" class="form-ctrl" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
 
     <label for="Şifre">Şifre</label>
-    <input type="text" class="form-ctrl" placeholder="Kullanıcı şifresi" name="sifre" value="@Model.sifre" />
+    <input type="text" class="form-ctrl" placeholder="Kullanıcı şifresi" name="Password" value="@Model.Password" />
     <div style="float: left;">
         @Html.CheckBox("yapimci", inRole('Y'))
         <label for="yapimci" style="line-height: 15px; font-size: 12px; width: fit-content">Yapımcı</label>

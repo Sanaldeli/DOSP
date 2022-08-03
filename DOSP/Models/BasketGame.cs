@@ -12,13 +12,14 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdminTicket
+    public partial class BasketGame
     {
         public int ID { get; set; }
-        public int UserID { get; set; }
-        public int TicketID { get; set; }
+        public int BasketID { get; set; }
+        public int GameID { get; set; }
+        public bool isPaid { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual Ticket Ticket { get; set; }
+        public virtual Basket Basket { get; set; }
+        public virtual Game Game { get; set; }
     }
 }

@@ -9,35 +9,39 @@ namespace DOSP.Controllers
 {
     public class AdminDestekController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
             return View();
         }
+
         [Authorize(Roles = "A")]
         public ActionResult ARapor()
         {
-            List<Rapor> r = m.Rapors.ToList();
+            List<Report> r = _dc.Reports.ToList();
             return View(r);
         }
+
         [Authorize(Roles = "A")]
         public ActionResult ARaporGoruntule(int id)
         {
-            Rapor r = m.Rapors.FirstOrDefault(x => x.RaporID == id);
+            Report r = _dc.Reports.FirstOrDefault(x => x.ID == id);
             return View(r);
         }
+
         [Authorize(Roles = "A")]
         public ActionResult ATicket()
         {
-            List<Ticket> t = m.Tickets.ToList();
+            List<Ticket> t = _dc.Tickets.ToList();
             return View(t);
         }
+
         [Authorize(Roles = "A")]
         public ActionResult ATicketGoruntule(int id)
         {
-            Ticket t = m.Tickets.FirstOrDefault(x => x.TicketID == id);
+            Ticket t = _dc.Tickets.FirstOrDefault(x => x.ID == id);
             return View(t);
         }
     }

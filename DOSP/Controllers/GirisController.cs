@@ -10,26 +10,30 @@ namespace DOSP.Controllers
 {
     public class GirisController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
+
         [HttpGet]
         public ActionResult Index()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
+                Console.WriteLine(HttpContext.User.Identity);
                 return RedirectToAction("Index", "Magaza");
             }
-            ViewBag.kullanici = m.Kullanicis.ToList();
-            ViewBag.yapimci = m.Yapimcis.ToList();
+
+            ViewBag.kullanici = _dc.Users.ToList();
+            ViewBag.yapimci = _dc.Developers.ToList();
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Kullanici k, string ReturnUrl)
+        public ActionResult Index(User k, string ReturnUrl)
         {
-            Kullanici tmpk = m.Kullanicis.FirstOrDefault(x => x.rumuz == k.rumuz && x.sifre == k.sifre);
+            User tmpk = _dc.Users.FirstOrDefault(x => x.Nickname == k.Nickname && x.Password == k.Password);
             if (tmpk != null)
             {
-                FormsAuthentication.SetAuthCookie(tmpk.rumuz, false);
+                FormsAuthentication.SetAuthCookie(tmpk.Nickname, false);
                 if (!string.IsNullOrEmpty(ReturnUrl))
                 {
                     return Redirect(ReturnUrl);
@@ -39,30 +43,32 @@ namespace DOSP.Controllers
             ViewBag.error = "Kullanıcı adı veya parola hatalı.";
             return View();
         }
+
         public ActionResult Kayit()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Kayit(Kullanici k)
+        public ActionResult Kayit(User k)
         {
             if (ModelState.IsValid)
             {
-                using (DOSPEntities db = new DOSPEntities())
+                using (DataContext db = new DataContext())
                 {
-                    var check = db.Kullanicis.FirstOrDefault(s => s.rumuz == k.rumuz);
+                    var check = db.Users.FirstOrDefault(s => s.Nickname == k.Nickname);
                     if (check == null)
                     {
-                        k.kayitTarihi = DateTime.Now;
+                        k.RegistrationDate = DateTime.Now;
                         db.Configuration.ValidateOnSaveEnabled = false;
-                        k.Rol = "K";
-                        db.Kullanicis.Add(k);
-                        Sepet s = new Sepet
+                        k.Role = "K";
+                        db.Users.Add(k);
+                        Basket s = new Basket
                         {
-                            KullaniciID = k.KullaniciID
+                            UserID = k.ID
                         };
-                        db.Sepets.Add(s);
+                        db.Baskets.Add(s);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -72,6 +78,7 @@ namespace DOSP.Controllers
             }
             return View();
         }
+
         [Authorize]
         public ActionResult Cikis()
         {

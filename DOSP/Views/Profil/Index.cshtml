@@ -6,10 +6,10 @@
 }
 
 @using DOSP.Models
-@model Kullanici
+@model User
 
 @section nav {
-    <a>@Model.rumuz</a>
+    <a>@Model.Nickname</a>
 }
 
 @section scripts {
@@ -21,10 +21,10 @@
 
 <div class="user-header">
     <img class="user-img" src="~/Content/Assets/Images/default-pp.jpg" />
-    <h2 id="regdate">@Model.kayitTarihi.ToString("dd MMMM yyyy")</h2>
-    <h1 class="username">@Model.rumuz</h1>
+    <h2 id="regdate">@Model.RegistrationDate.ToString("dd MMMM yyyy")</h2>
+    <h1 class="username">@Model.Nickname</h1>
     <br />
-    <h2 id="realname">@Model.adSoyad</h2>
+    <h2 id="realname">@Model.FullName</h2>
 </div>
 
 <div class="container-hasGames">
@@ -32,11 +32,11 @@
     <div id="border"></div>
 </div>
 <div class="user-gamelist">
-    @foreach (Kutuphane x in ViewBag.kutuphane)
+    @foreach (Library l in ViewBag.kutuphane)
     {
         <div class="user-game">
-            <img src="~/Content/Assets/Images/gcont/@x.OyunID/cover.jpg" />
-            <a href="/Magaza/Oyun/@x.OyunID">@x.Oyun.OyunAdi</a>
+            <img src="~/Content/Assets/Images/gcont/@l.GameID/cover.jpg" />
+            <a href="/Magaza/Oyun/@l.GameID">@l.Game.Title</a>
         </div>
         if (++i >= 4)
         {

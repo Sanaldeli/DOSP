@@ -1,27 +1,27 @@
 ﻿@using DOSP.Models
-@model Oyun
+@model Game
 
 @{
     ViewBag.Title = "Oyun";
     ViewBag.nav = "magaza";
-    Model m = new Model();
-    Kullanici user = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
+    DataContext cd = new DataContext();
+    User user = cd.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
 }
 
 @section nav {
     <a href="/">Mağaza</a>
-    <a>@Model.OyunAdi</a>
+    <a>@Model.Title</a>
 }
 
 @functions {
     bool UserHasGame()
     {
-        Model m = new Model();
-        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
-        List<Kutuphane> lib = m.Kutuphanes.Where(x => x.KullaniciID == k.KullaniciID).ToList();
-        foreach (Kutuphane x in lib)
+        DataContext cd = new DataContext();
+        User k = cd.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
+        List<Library> lib = cd.Libraries.Where(x => x.UserID == k.ID).ToList();
+        foreach (Library l in lib)
         {
-            if (x.OyunID == Model.OyunID)
+            if (l.GameID == Model.ID)
             {
                 return true;
             }
@@ -31,12 +31,12 @@
 
     bool gameInCart()
     {
-        Model m = new Model();
-        int SepetID = m.Sepets.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name).SepetID;
-        List<sepetOyun> sO = m.SepetOyuns.Where(x => x.SepetID == SepetID).ToList();
-        foreach (sepetOyun x in sO)
+        DataContext cd = new DataContext();
+        int SepetID = cd.Baskets.FirstOrDefault(x => x.User.Nickname == HttpContext.Current.User.Identity.Name).BasketID;
+        List<BasketGame> sO = cd.BasketGames.Where(x => x.BasketID == SepetID).ToList();
+        foreach (BasketGame bG in sO)
         {
-            if (x.OyunID == Model.OyunID)
+            if (bG.GameID == Model.ID)
             {
                 return true;
             }
@@ -72,7 +72,7 @@
         }
 
         $("a#canBeAdded").click(function () {       //Sepete ekle
-            var id = @Model.OyunID;
+            var id = @Model.ID;
             $.ajax(
                 {
                     type: "POST",
@@ -100,7 +100,7 @@
                 bool exist = true;
                 do
                 {
-                    path = "/Content/Assets/Images/gcont/" + Model.OyunID + "/" + i + ".jpg";
+                    path = "/Content/Assets/Images/gcont/" + Model.ID + "/" + i + ".jpg";
                     abP = HttpContext.Current.Server.MapPath(path);
                     if (System.IO.File.Exists(abP)) { i++; }
                     else { exist = false; }
@@ -108,7 +108,7 @@
                 i--;
                 for (int j = 1; j <= i; j++)
                 {
-                    path = "/Content/Assets/Images/gcont/" + Model.OyunID + "/" + j + ".jpg";
+                    path = "/Content/Assets/Images/gcont/" + Model.ID + "/" + j + ".jpg";
                     <text>
                         <div class="slide">
                             <div class="slideNum">@j / @i</div>
@@ -121,7 +121,7 @@
             <a class="next" onclick="plusSlides(1)" style="right: -30px; border-radius: 0 5px 5px 0;">&#10095;</a>
         </div>
         <div class="page-header">
-            <h1>@Model.OyunAdi</h1>
+            <h1>@Model.Title</h1>
             @if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 if (UserHasGame())
@@ -142,34 +142,34 @@
                     ViewBag.gamePriceHover = "Sepete Ekle";
                     ViewBag.icon = "shopping-basket";
                 }
-                <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover" data-oid="@Model.OyunID">
+                <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover" data-oid="@Model.ID">
                     <i class="fas fa-@ViewBag.icon"></i>
-                    <h1>@(Model.OyunFiyati + "TL")</h1>
+                    <h1>@(Model.Price + "TL")</h1>
                 </a>
             }
             else
             {
                 <a class="game-price" id="notLogged" title="Oyunu satın alabilmek için giriş yapın." href="/Giris">
-                    <h1>@(Model.OyunFiyati + "TL")</h1>
+                    <h1>@(Model.Price + "TL")</h1>
                 </a>
             }
         </div>
     </div>
     <div class="page-right">
-        <img src="~/Content/Assets/images/gcont/@Model.OyunID/cover.jpg" />
-        <div id="gameprop">Çıkış Tarihi: @Model.CikisTarihi.ToString("dd MMMM yyyy")</div>
+        <img src="~/Content/Assets/images/gcont/@Model.ID/cover.jpg" />
+        <div id="gameprop">Çıkış Tarihi: @Model.ReleaseDate.ToString("dd MMMM yyyy")</div>
         <br />
-        <p>@Model.OyunAciklama</p>
+        <p>@Model.Description</p>
         <br />
-        <div id="gameprop">Yapımcı: <a href="/Yapimci/Firma/@Model.Yapimci.YapimciID">@Model.Yapimci.YapimciAdi</a></div>
-        <div id="gameprop">Kategori: @Model.Kategori.KategoriAdi</div>
+        <div id="gameprop">Yapımcı: <a href="/Yapimci/Firma/@Model.DeveloperID">@Model.Developer.Name</a></div>
+        <div id="gameprop">Kategori: @Model.Category.Name</div>
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
             <div class="ctrl">
-                <a class="btn btn-red" href="/Destek/Rapor/@Model.OyunID"><i class="fas fa-flag" title="Oyunu Raporla"></i></a>
+                <a class="btn btn-red" href="/Destek/Rapor/@Model.ID"><i class="fas fa-flag" title="Oyunu Raporla"></i></a>
                 @if (User.IsInRole("A"))
                 {
-                    <a href="/Magaza/Duzenle/@Model.OyunID" class="btn btn-yellow">Düzenle</a>
+                    <a href="/Magaza/Duzenle/@Model.ID" class="btn btn-yellow">Düzenle</a>
                 }
             </div>
         }

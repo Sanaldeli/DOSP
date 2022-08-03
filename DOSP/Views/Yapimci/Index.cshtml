@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model List<Yapimci>
+@model List<Developer>
 
 @{
     ViewBag.Title = "Yapımcı Listesi";
@@ -45,17 +45,17 @@
         <th>Kullanıcı</th>
         <th width="140px">Kontrol Tuşları</th>
     </tr>
-    @foreach (Yapimci y in Model)
+    @foreach (Developer d in Model)
     {
         <tr>
-            <td>@y.YapimciID</td>
-            <td><a href="/Yapimci/Firma/@y.YapimciID">@y.YapimciAdi</a></td>
-            <td><a href="/Profil/Index/@y.KullaniciID">@y.Kullanici.rumuz</a></td>
+            <td>@d.ID</td>
+            <td><a href="/Yapimci/Firma/@d.ID">@d.Name</a></td>
+            <td><a href="/Profil/Index/@d.UserID">@d.User.Nickname</a></td>
             <td>
-                <a href="/Yapimci/Guncelle/@y.YapimciID" class="btn btn-green btn-left">Güncelle</a>
+                <a href="/Yapimci/Guncelle/@d.ID" class="btn btn-green btn-left">Güncelle</a>
                 @if (User.IsInRole("A"))
                 {
-                    <a class="btn btn-red btn-right" id="sil" data-yapid="@y.YapimciID">Sil</a>
+                    <a class="btn btn-red btn-right" id="sil" data-yapid="@d.ID">Sil</a>
                 }
             </td>
         </tr>

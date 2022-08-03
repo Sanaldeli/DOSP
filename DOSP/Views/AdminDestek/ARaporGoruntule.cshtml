@@ -10,17 +10,17 @@
     <a>@ViewBag.Title</a>
 }
 
-@model DOSP.Models.Rapor
+@model DOSP.Models.Report
 
 <ul style="list-style: none;">
-    <li>Rapor ID: @Model.RaporID</li>
-    <li>Kullanıcı: @Model.Kullanici.rumuz</li>
-    <li>Tarihi: @Model.RaporTarihi.ToString("dd.MM.yyyy H:mm")</li>
-    <li>Oyun: <a href="/Magaza/Oyun/@Model.OyunID">@Model.Oyun.OyunAdi</a></li>
+    <li>Rapor ID: @Model.ID</li>
+    <li>Kullanıcı: @Model.User.Nickname</li>
+    <li>Tarihi: @Model.ReportDate.ToString("dd.MM.yyyy H:mm")</li>
+    <li>Oyun: <a href="/Magaza/Oyun/@Model.GameID">@Model.Game.Title</a></li>
     <li class="content-border"></li>
     <li>
         Açıklama:
         <br />
-        <p style="word-wrap: break-word;">@Model.aciklama</p>
+        <p style="word-wrap: break-word;">@Model.Description</p>
     </li>
 </ul>

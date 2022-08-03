@@ -35,14 +35,14 @@ else
                 <th>Kategori</th>
                 <th>Yapımcı</th>
             </tr>
-            @foreach (Oyun x in ViewBag.oyun)
+            @foreach (Game g in ViewBag.oyun)
             {
                 <tr>
-                    <td><a href="/Magaza/Oyun/@x.OyunID">@x.OyunAdi</a></td>
-                    <td>@x.OyunFiyati</td>
-                    <td>@x.CikisTarihi.ToString("dd.MM.yyyy")</td>
-                    <td>@x.Kategori.KategoriAdi</td>
-                    <td><a href="/Yapimci/Firma/@x.YapimciID">@x.Yapimci.YapimciAdi</a></td>
+                    <td><a href="/Magaza/Oyun/@g.ID">@g.Title</a></td>
+                    <td>@g.Price</td>
+                    <td>@g.ReleaseDate.ToString("dd.MM.yyyy")</td>
+                    <td>@g.Category.Name</td>
+                    <td><a href="/Yapimci/Firma/@g.DeveloperID">@g.Developer.Name</a></td>
                 </tr>
             }
         </table>
@@ -56,9 +56,9 @@ else
         <div class="content-border"></div>
         <h4>Bulduğumuz yapımcılar:</h4>
         <ul style="list-style: none;">
-            @foreach (Yapimci x in ViewBag.yapimci)
+            @foreach (Developer d in ViewBag.yapimci)
             {
-                <li><a href="/Yapimci/Firma/@x.YapimciID">@x.YapimciAdi</a></li>
+                <li><a href="/Yapimci/Firma/@d.ID">@d.Name</a></li>
             }
         </ul>
     }

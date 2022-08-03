@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model List<Kategori>
+@model List<Category>
 
 @{
     ViewBag.Title = "Kategoriler";
@@ -43,14 +43,14 @@
         <th>İsim</th>
         <th width="140px">Kontrol Tuşları</th>
     </tr>
-    @foreach (Kategori k in Model)
+    @foreach (Category c in Model)
     {
         <tr>
-            <td>@k.KategoriID</td>
-            <td>@k.KategoriAdi</td>
+            <td>@c.ID</td>
+            <td>@c.Name</td>
             <td>
-                <a href="/Kategori/Guncelle/@k.KategoriID" class="btn btn-green btn-left">Güncelle</a>
-                <a class="btn btn-red btn-right" id="sil" data-ktgid="@k.KategoriID">Sil</a>
+                <a href="/Kategori/Guncelle/@c.ID" class="btn btn-green btn-left">Güncelle</a>
+                <a class="btn btn-red btn-right" id="sil" data-ktgid="@c.ID">Sil</a>
             </td>
         </tr>
     }

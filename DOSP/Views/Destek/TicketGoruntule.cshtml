@@ -13,14 +13,14 @@
 @model Ticket
 
 <ul style="list-style: none;">
-    <li>Ticket ID: @Model.TicketID</li>
-    <li>Kullanıcı: @Model.Kullanici.rumuz</li>
-    <li>Tarihi: @Model.TicketTarihi.ToString("dd.MM.yyyy H:mm")</li>
+    <li>Ticket ID: @Model.ID</li>
+    <li>Kullanıcı: @Model.User.Nickname</li>
+    <li>Tarihi: @Model.CreatedAt.ToString("dd.MM.yyyy H:mm")</li>
     <li class="content-border"></li>
-    <li>Konusu: @Model.TicketBasligi</li>
+    <li>Konusu: @Model.Title</li>
     <li>
         Açıklama:
         <br />
-        <p style="word-wrap: break-word;">@Model.TicketAciklama</p>
+        <p style="word-wrap: break-word;">@Model.Description</p>
     </li>
 </ul>

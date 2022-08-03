@@ -146,19 +146,28 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\UserRoleProvider.cs" />
-    <Compile Include="Models\adminRapor.cs">
+    <Compile Include="Models\AdminReport.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\adminTicket.cs">
+    <Compile Include="Models\AdminTicket.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Kategori.cs">
+    <Compile Include="Models\Basket.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Kullanici.cs">
+    <Compile Include="Models\BasketGame.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Kutuphane.cs">
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Developer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Game.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Library.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model.Context.cs">
@@ -176,28 +185,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Oyun.cs">
+    <Compile Include="Models\Report.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Rapor.cs">
+    <Compile Include="Models\ReportCategory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RaporKategori.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sepet.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sepetOyun.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Table.cs">
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Yapimci.cs">
+    <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,6 +220,13 @@
     <Content Include="Content\Assets\Images\trash.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Assets\Fonts\FugazOne-Regular.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Black.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Bold.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Light.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Medium.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Regular.ttf" />
+    <Content Include="Content\Assets\Fonts\Roboto-Thin.ttf" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -229,20 +236,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
-    <Content Include="Content\Assets\Fonts\FugazOne-Regular.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Black.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Bold.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Light.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Medium.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Regular.ttf" />
-    <Content Include="Content\Assets\Fonts\Roboto-Thin.ttf" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -291,6 +284,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

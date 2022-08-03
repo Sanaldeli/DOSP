@@ -9,22 +9,22 @@ namespace DOSP.Controllers
 {
     public class ProfilController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize]
         public ActionResult Index(int? id)
         {
-            Kullanici k;
+            User k;
             if (id == null)
             {
-                k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.User.Identity.Name);
+                k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
             }
             else
             {
-                k = m.Kullanicis.FirstOrDefault(x => x.KullaniciID == id);
+                k = _dc.Users.FirstOrDefault(x => x.ID == id);
             }
             
-            ViewBag.kutuphane = m.Kutuphanes.Where(x => x.KullaniciID == k.KullaniciID).ToList();
+            ViewBag.kutuphane = _dc.Libraries.Where(x => x.UserID == k.ID).ToList();
             return View(k);
         }
     }

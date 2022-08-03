@@ -12,14 +12,13 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sepetOyun
+    public partial class AdminReport
     {
         public int ID { get; set; }
-        public int SepetID { get; set; }
-        public int OyunID { get; set; }
-        public bool odendi { get; set; }
+        public int UserID { get; set; }
+        public int ReportID { get; set; }
     
-        public virtual Oyun Oyun { get; set; }
-        public virtual Sepet Sepet { get; set; }
+        public virtual User User { get; set; }
+        public virtual Report Report { get; set; }
     }
 }

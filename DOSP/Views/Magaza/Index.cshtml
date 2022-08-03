@@ -1,22 +1,22 @@
 ﻿@using DOSP.Models
-@model List<Oyun>
+@model List<Game>
 
 @{
     ViewBag.Title = "Mağaza";
     ViewBag.Nav = "magaza";
-    Model m = new Model();
-    Kullanici user = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
+    DataContext dc = new DataContext();
+    User user = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
 }
 
 @functions {
     bool UserHasGame(int OyunID)
     {
-        Model m = new Model();
-        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
-        List<Kutuphane> lib = m.Kutuphanes.Where(x => x.KullaniciID == k.KullaniciID).ToList();
-        foreach (Kutuphane x in lib)
+        DataContext dc = new DataContext();
+        User k = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
+        List<Library> lib = dc.Libraries.Where(x => x.UserID == k.ID).ToList();
+        foreach (var l in lib)
         {
-            if (x.OyunID == OyunID)
+            if (l.GameID == OyunID)
             {
                 return true;
             }
@@ -26,12 +26,12 @@
 
     bool GameInCart(int OyunID)
     {
-        Model m = new Model();
-        int SepetID = m.Sepets.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name).SepetID;
-        List<sepetOyun> sO = m.SepetOyuns.Where(x => x.SepetID == SepetID).ToList();
-        foreach (sepetOyun x in sO)
+        DataContext dc = new DataContext();
+        int SepetID = dc.Baskets.FirstOrDefault(x => x.User.Nickname == HttpContext.Current.User.Identity.Name).BasketID;
+        List<BasketGame> sO = dc.BasketGames.Where(x => x.BasketID == SepetID).ToList();
+        foreach (var bG in sO)
         {
-            if (x.OyunID == OyunID)
+            if (bG.GameID == OyunID)
             {
                 return true;
             }
@@ -92,17 +92,17 @@
     <div class="game-list">
         <div id="not-found">Oyun bulunamadı.</div>
 
-        @foreach (Oyun x in Model)
+        @foreach (Game g in Model)
         {
-            <div class="game-content" data-ktgid="@x.KategoriID">
-                <img src="~/Content/Assets/images/gcont/@x.OyunID/cover.jpg" />
+            <div class="game-content" data-ktgid="@g.CategoryID">
+                <img src="~/Content/Assets/Images/game-photo.jpg" />
                 <div class="game-desc">
-                    <a href="/Magaza/Oyun/@x.OyunID">@x.OyunAdi</a>
-                    <h1>Yapımcı: <a href="/Yapimci/Firma/@x.Yapimci.YapimciID">@x.Yapimci.YapimciAdi</a> | Kategori: @x.Kategori.KategoriAdi</h1>
+                    <a href="/Magaza/Oyun/@g.ID">@g.Title</a>
+                    <h1>Yapımcı: <a href="/Yapimci/Firma/@g.DeveloperID">@g.Developer.Name</a> | Kategori: @g.Category.Name</h1>
                 </div>
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
-                    if (UserHasGame(x.OyunID))
+                    if (UserHasGame(g.ID))
                     {
                         ViewBag.gamePriceID = "cannotBeAdded";
                         ViewBag.gamePriceTitle = null;
@@ -110,7 +110,7 @@
                         ViewBag.icon = "archive";
                         ViewBag.link = "/Kutuphane";
                     }
-                    else if (GameInCart(x.OyunID))
+                    else if (GameInCart(g.ID))
                     {
                         ViewBag.gamePriceID = "inCart";
                         ViewBag.gamePriceTitle = null;
@@ -121,12 +121,12 @@
                     else
                     {
                         ViewBag.gamePriceID = "canBeAdded";
-                        ViewBag.gamePriceTitle = x.OyunFiyati + "TL";
+                        ViewBag.gamePriceTitle = g.Price + "TL";
                         ViewBag.gamePriceHover = "Sepete Ekle";
                         ViewBag.icon = "shopping-basket";
                         ViewBag.link = null;
                     }
-                    <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover" data-oid="@x.OyunID" href="@ViewBag.link">
+                    <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover" data-oid="@g.ID" href="@ViewBag.link">
                         <i class="fas fa-@ViewBag.icon"></i>
                         @if (ViewBag.gamePriceTitle != null)
                         {
@@ -137,7 +137,7 @@
                 else
                 {
                     <a class="game-price" id="notLogged" title="Oyunu satın alabilmek için giriş yapın." href="/Giris">
-                        <h1>@(x.OyunFiyati + "TL")</h1>
+                        <h1>@(g.Price + "TL")</h1>
                     </a>
                 }
             </div>
@@ -151,11 +151,11 @@
                 <input type="radio" checked="checked" value="0" name="radio">
                 <span class="checkmark"></span>
             </label>
-            @foreach (Kategori k in ViewBag.kategori)
+            @foreach (Category c in ViewBag.kategori)
             {
                 <label class="checkbox">
-                    @k.KategoriAdi
-                    <input type="radio" name="radio" value="@k.KategoriID" />
+                    @c.Name
+                    <input type="radio" name="radio" value="@c.ID" />
                     <span class="checkmark"></span>
                 </label>
             }

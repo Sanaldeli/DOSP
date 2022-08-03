@@ -1,12 +1,12 @@
 ﻿@using DOSP.Models
-@model Oyun
+@model Game
 
 @{
     ViewBag.Title = "Oyun Düzenle";
     ViewBag.nav = "magaza";
 
-    Model m = new Model();
-    ViewBag.kullanici = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
+    DataContext dc = new DataContext();
+    ViewBag.kullanici = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
 }
 
 @section nav {
@@ -18,45 +18,38 @@
 <h2>@ViewBag.Title</h2>
 
 <form method="post" action="/Magaza/Duzenle" class="form-content">
-    <input type="hidden" name="OyunID" value="@Model.OyunID" />
+    <input type="hidden" name="ID" value="@Model.ID" />
 
     <label for="isim">İsim</label>
-    <input type="text" class="form-ctrl" placeholder="Oyunun ismi" name="OyunAdi" value="@Model.OyunAdi" required />
+    <input type="text" class="form-ctrl" placeholder="Oyunun ismi" name="Title" value="@Model.Title" required />
 
     <label for="Fiyat">Fiyat</label>
-    <input type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="OyunFiyati" value="@Model.OyunFiyati" required />
+    <input type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="Price" value="@Model.Price" required />
 
     <label for="Açıklama">Açıklama</label>
-    <textarea class="form-ctrl" placeholder="Oyunun açıklaması" name="OyunAciklama">@Model.OyunAciklama</textarea>
+    <textarea class="form-ctrl" placeholder="Oyunun açıklaması" name="Description">@Model.Description</textarea>
+
+    <label for="Çıkış Tarihi">Çıkış Tarihi</label>
+    <input type="date" class="form-ctrl" placeholder="Çıkış tarihi" name="ReleaseDate" value="@Model.ReleaseDate" required/>
 
     <label for="Kategori">Kategori</label>
-    <select class="form-ctrl" name="KategoriID" required>
-        @foreach (Kategori k in ViewBag.ktg)
+    <select class="form-ctrl" name="CategoryID" required>
+        @foreach (Category c in ViewBag.ktg)
         {
-            if (k.KategoriID == Model.KategoriID)
+            if (c.ID == Model.CategoryID)
             {
-                <option value="@k.KategoriID" selected>@k.KategoriAdi</option>
+                <option value="@c.ID" selected>@c.Name</option>
             }
             else
             {
-                <option value="@k.KategoriID">@k.KategoriAdi</option>
+                <option value="@c.ID">@c.Name</option>
             }
         }
     </select>
 
     <label for="Yapımcı">Yapımcı</label>
-    <select class="form-ctrl" name="YapimciID" required>
-        @foreach (Yapimci y in ViewBag.yapimci)
-        {
-            if (y.YapimciID == Model.YapimciID)
-            {
-                <option value="@y.YapimciID" selected>@y.YapimciAdi</option>
-            }
-            else
-            {
-                <option value="@y.YapimciID">@y.YapimciAdi</option>
-            }
-        }
+    <select class="form-ctrl" name="DeveloperID" disabled>
+        <option value="@ViewBag.yapimci.ID" selected>@ViewBag.yapimci.Name</option>
     </select>
 
     <input type="submit" value="Kaydet" class="btn btn-green" />

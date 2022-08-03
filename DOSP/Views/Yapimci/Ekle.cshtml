@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model Yapimci
+@model Developer
 
 @{
     ViewBag.Title = "Yapımcı Ekle";
@@ -16,13 +16,13 @@
 
 <form action="/Yapimci/Ekle" method="post" role="form" class="form-content">
 
-    <input class="form-ctrl" value="" type="text" name="YapimciAdi" placeholder="Firma adını giriniz" required />
+    <input class="form-ctrl" value="" type="text" name="Name" placeholder="Firma adını giriniz" required />
 
-    <select class="form-ctrl" name="KullaniciID" required>
+    <select class="form-ctrl" name="UserID" required>
         <option value="0" selected>Kullanıcı seçiniz</option>
-        @foreach (Kullanici k in ViewBag.kullanici)
+        @foreach (User u in ViewBag.kullanici)
         {
-            <option value="@k.KullaniciID">@k.rumuz</option>
+            <option value="@u.ID">@u.Nickname</option>
         }
     </select>
     <button type="submit" class="btn btn-yellow">Kaydet</button>

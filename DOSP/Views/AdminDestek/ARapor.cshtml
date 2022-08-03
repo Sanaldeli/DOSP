@@ -11,7 +11,7 @@
 }
 
 @using DOSP.Models
-@model List<Rapor>
+@model List<Report>
 
 <table>
     <tr>
@@ -22,15 +22,15 @@
         <th>Oyun</th>
         <th>Tarih</th>
     </tr>
-    @foreach (Rapor x in Model)
+    @foreach (var r in Model)
     {
         <tr>
-            <td><a href="/AdminDestek/ARaporGoruntule/@x.RaporID">@x.RaporID</a></td>
-            <td>@x.RaporKategori.KategoriAdi</td>
-            <td>@x.KullaniciID</td>
-            <td>@x.Kullanici.rumuz</td>
-            <td>@x.Oyun.OyunAdi</td>
-            <td>@x.RaporTarihi.ToString("dd.MM.yyyy H:mm")</td>
+            <td><a href="/AdminDestek/ARaporGoruntule/@r.ID">@r.ID</a></td>
+            <td>@r.ReportCategory.Name</td>
+            <td>@r.UserID</td>
+            <td>@r.User.Nickname</td>
+            <td>@r.Game.Title</td>
+            <td>@r.ReportDate.ToString("dd.MM.yyyy H:mm")</td>
         </tr>
     }
 </table>

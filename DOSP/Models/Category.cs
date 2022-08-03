@@ -12,25 +12,18 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Rapor
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rapor()
+        public Category()
         {
-            this.adminRapors = new HashSet<adminRapor>();
+            this.Games = new HashSet<Game>();
         }
     
-        public int RaporID { get; set; }
-        public int KategoriID { get; set; }
-        public int KullaniciID { get; set; }
-        public DateTime RaporTarihi { get; set; }
-        public string aciklama { get; set; }
-        public int OyunID { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<adminRapor> adminRapors { get; set; }
-        public virtual Kullanici Kullanici { get; set; }
-        public virtual Oyun Oyun { get; set; }
-        public virtual RaporKategori RaporKategori { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

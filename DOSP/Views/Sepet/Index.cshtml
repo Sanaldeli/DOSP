@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model List<sepetOyun>
+@model List<BasketGame>
 
 @{
     ViewBag.Title = "Sepet";
@@ -61,16 +61,16 @@
 @if (Model.Count != 0)
 {
     int toplam = 0;
-    foreach (var s in Model)
+    foreach (BasketGame bG in Model)
     {
         <div class="cart-item">
-            <img src="~/Content/Assets/Images/gcont/@s.OyunID/cover.jpg" />
-            <a href="~/Magaza/Oyun/@s.OyunID" class="name">@s.Oyun.OyunAdi</a>
+            <img src="~/Content/Assets/Images/game-photo.jpg" />
+            <a href="~/Magaza/Oyun/@bG.GameID" class="name">@bG.Game.Title</a>
             <div class="cart-price">
-                <a class="fas fa-times" id="remove" data-sid="@s.ID" title="Sepetten Kaldır"></a>
-                <h1>@s.Oyun.OyunFiyati</h1>
+                <a class="fas fa-times" id="remove" data-sid="@bG.ID" title="Sepetten Kaldır"></a>
+                <h1>@bG.Game.Price</h1>
             </div>
-            @{ toplam += s.Oyun.OyunFiyati; }
+            @{ toplam += bG.Game.Price; }
         </div>
     }
     <div class="cart-complete">

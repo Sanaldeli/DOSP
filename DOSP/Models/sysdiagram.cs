@@ -12,13 +12,12 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class adminRapor
+    public partial class sysdiagram
     {
-        public int ID { get; set; }
-        public int KullaniciID { get; set; }
-        public int RaporID { get; set; }
-    
-        public virtual Kullanici Kullanici { get; set; }
-        public virtual Rapor Rapor { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

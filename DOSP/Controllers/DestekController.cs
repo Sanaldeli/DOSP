@@ -9,39 +9,42 @@ namespace DOSP.Controllers
 {
     public class DestekController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult Gecmis()
         {
-            Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.User.Identity.Name);
-            ViewBag.Ticket = m.Tickets.Where(x => x.KullaniciID == k.KullaniciID).ToList();
-            ViewBag.Rapor = m.Rapors.Where(x => x.KullaniciID == k.KullaniciID).ToList();
+            User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
+            ViewBag.Ticket = _dc.Tickets.Where(x => x.UserID == k.ID).ToList();
+            ViewBag.Rapor = _dc.Reports.Where(x => x.UserID == k.ID).ToList();
             return View();
         }
+
         [HttpGet]
         [Authorize]
         public ActionResult Ticket()
         {
             return View();
         }
+
         [HttpPost]
         [Authorize]
         public ActionResult Ticket(Ticket t)
         {
-            Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.User.Identity.Name);
+            User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
 
             if (ModelState.IsValid)
             {
-                using (DOSPEntities db = new DOSPEntities())
+                using (DataContext db = new DataContext())
                 {
-                    t.KullaniciID = k.KullaniciID;
-                    t.TicketTarihi = DateTime.Now;
+                    t.UserID = k.ID;
+                    t.CreatedAt = DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.Tickets.Add(t);
                     db.SaveChanges();
@@ -50,43 +53,47 @@ namespace DOSP.Controllers
             }
             return View();
         }
+
         [HttpGet]
         [Authorize]
         public ActionResult Rapor(int id)
         {
-            ViewBag.oyun = m.Oyuns.FirstOrDefault(x => x.OyunID == id);
-            List<RaporKategori> rK = m.RaporKategoris.ToList();
+            ViewBag.oyun = _dc.Games.FirstOrDefault(x => x.ID == id);
+            List<ReportCategory> rK = _dc.ReportCategories.ToList();
             return View(rK);
         }
+
         [HttpPost]
         [Authorize]
-        public ActionResult Rapor(Rapor r)
+        public ActionResult Rapor(Report r)
         {
-            Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.User.Identity.Name);
+            User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
 
             if (ModelState.IsValid)
             {
-                using (DOSPEntities db = new DOSPEntities())
+                using (DataContext db = new DataContext())
                 {
-                    r.KullaniciID = k.KullaniciID;
-                    r.RaporTarihi = DateTime.Now;
+                    r.UserID = k.ID;
+                    r.ReportDate = DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
-                    db.Rapors.Add(r);
+                    db.Reports.Add(r);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
             return View();
         }
+
         [Authorize]
         public ActionResult RaporGoruntule(int id)
         {
-            Rapor r = m.Rapors.FirstOrDefault(x => x.RaporID == id);
+            Report r = _dc.Reports.FirstOrDefault(x => x.ID == id);
             return View(r);
         }
+
         public ActionResult TicketGoruntule(int id)
         {
-            Ticket t = m.Tickets.FirstOrDefault(x => x.TicketID == id);
+            Ticket t = _dc.Tickets.FirstOrDefault(x => x.ID == id);
             return View(t);
         }
     }

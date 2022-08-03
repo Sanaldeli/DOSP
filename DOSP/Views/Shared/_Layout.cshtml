@@ -3,13 +3,13 @@
 
     if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        Model m = new Model();
-        Kullanici k = m.Kullanicis.FirstOrDefault(x => x.rumuz == HttpContext.Current.User.Identity.Name);
-        Sepet s = m.Sepets.FirstOrDefault(x => x.KullaniciID == k.KullaniciID);
-        ViewBag.id = k.KullaniciID;
-        ViewBag.rumuz = k.rumuz;
-        ViewBag.bakiye = k.bakiye;
-        int sepetSayisi = m.SepetOyuns.Where(x => x.SepetID == s.SepetID && x.odendi == false).ToList().Count;
+        DataContext dc = new DataContext();
+        User k = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
+        Basket s = dc.Baskets.FirstOrDefault(x => x.UserID == k.ID);
+        ViewBag.id = k.ID;
+        ViewBag.rumuz = k.Nickname;
+        ViewBag.bakiye = k.Wallet;
+        int sepetSayisi = dc.BasketGames.Where(x => x.BasketID == s.BasketID && !x.isPaid).ToList().Count;
         if (sepetSayisi == 0)
         {
             ViewBag.sepet = null;
@@ -21,7 +21,11 @@
 
         if (User.IsInRole("Y"))
         {
-            ViewBag.yapimci = m.Yapimcis.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name).YapimciAdi;
+            ViewBag.yapimci = dc.Developers.FirstOrDefault(x => x.User.Nickname == HttpContext.Current.User.Identity.Name).Name;
+        } 
+        else
+        {
+            ViewBag.yapimci = null;
         }
     }
 }
@@ -91,7 +95,8 @@
                         {
                             <a id="aPanel" href="/AdminPaneli">Admin Paneli</a>
                         }
-                        else if (User.IsInRole("Y"))
+                        
+                        if (User.IsInRole("Y"))
                         {
 
                             <a id="yapimci" href="/Yapimci/Firma">@ViewBag.yapimci</a>

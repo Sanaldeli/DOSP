@@ -9,38 +9,40 @@ namespace DOSP.Controllers
 {
     public class KullaniciController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
-            List<Kullanici> k = m.Kullanicis.ToList();
+            List<User> k = _dc.Users.ToList();
             return View(k);
         }
+
         [HttpGet]
         [Authorize(Roles = "A")]
         public ActionResult Guncelle(int id)
         {
-            using (var context = new DOSPEntities())
+            using (var context = new DataContext())
             {
-                var data = context.Kullanicis.Where(x => x.KullaniciID == id).SingleOrDefault();
+                var data = context.Users.Where(x => x.ID == id).SingleOrDefault();
                 return View(data);
             }
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Guncelle(Kullanici k, bool admin, bool yapimci)
+        public ActionResult Guncelle(User k, bool admin, bool yapimci)
         {
-            using (var context = new DOSPEntities())
+            using (var context = new DataContext())
             {
-                var data = context.Kullanicis.FirstOrDefault(x => x.KullaniciID == k.KullaniciID);
+                var data = context.Users.FirstOrDefault(x => x.ID == k.ID);
 
                 if (data != null)
                 {
-                    data.rumuz = k.rumuz;
-                    data.adSoyad = k.adSoyad;
-                    data.bakiye = k.bakiye;
-                    data.sifre = k.sifre;
+                    data.Nickname = k.Nickname;
+                    data.FullName = k.FullName;
+                    data.Wallet = k.Wallet;
+                    data.Password = k.Password;
 
                     string roller = "K";
                     if (admin)
@@ -51,7 +53,7 @@ namespace DOSP.Controllers
                     {
                         roller += "Y";
                     }
-                    data.Rol = roller;
+                    data.Role = roller;
 
                     context.SaveChanges();
                     return RedirectToAction("Index");
@@ -59,13 +61,14 @@ namespace DOSP.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
         public ActionResult Sil(int id)
         {
-            Kullanici k = m.Kullanicis.FirstOrDefault(x => x.KullaniciID == id);
-            m.Kullanicis.Remove(k);
-            m.SaveChanges();
+            User k = _dc.Users.FirstOrDefault(x => x.ID == id);
+            _dc.Users.Remove(k);
+            _dc.SaveChanges();
 
             return RedirectToAction("Index");
         }

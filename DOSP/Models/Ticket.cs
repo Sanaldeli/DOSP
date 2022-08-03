@@ -17,17 +17,17 @@ namespace DOSP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ticket()
         {
-            this.adminTickets = new HashSet<adminTicket>();
+            this.AdminTickets = new HashSet<AdminTicket>();
         }
     
-        public int TicketID { get; set; }
-        public int KullaniciID { get; set; }
-        public DateTime TicketTarihi { get; set; }
-        public string TicketBasligi { get; set; }
-        public string TicketAciklama { get; set; }
+        public int ID { get; set; }
+        public int UserID { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string Title { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<adminTicket> adminTickets { get; set; }
-        public virtual Kullanici Kullanici { get; set; }
+        public virtual ICollection<AdminTicket> AdminTickets { get; set; }
+        public virtual User User { get; set; }
     }
 }

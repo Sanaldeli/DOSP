@@ -12,31 +12,31 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Oyun
+    public partial class Game
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Oyun()
+        public Game()
         {
-            this.Kutuphanes = new HashSet<Kutuphane>();
-            this.Rapors = new HashSet<Rapor>();
-            this.sepetOyuns = new HashSet<sepetOyun>();
+            this.BasketGames = new HashSet<BasketGame>();
+            this.Libraries = new HashSet<Library>();
+            this.Reports = new HashSet<Report>();
         }
     
-        public int OyunID { get; set; }
-        public string OyunAdi { get; set; }
-        public int OyunFiyati { get; set; }
-        public string OyunAciklama { get; set; }
-        public int YapimciID { get; set; }
-        public int KategoriID { get; set; }
-        public DateTime CikisTarihi { get; set; }
-    
-        public virtual Kategori Kategori { get; set; }
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public int Price { get; set; }
+        public string Description { get; set; }
+        public int DeveloperID { get; set; }
+        public int CategoryID { get; set; }
+        public DateTime ReleaseDate { get; set; } = DateTime.Now;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kutuphane> Kutuphanes { get; set; }
-        public virtual Yapimci Yapimci { get; set; }
+        public virtual ICollection<BasketGame> BasketGames { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Developer Developer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rapor> Rapors { get; set; }
+        public virtual ICollection<Library> Libraries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sepetOyun> sepetOyuns { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

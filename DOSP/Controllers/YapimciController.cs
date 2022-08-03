@@ -9,92 +9,99 @@ namespace DOSP.Controllers
 {
     public class YapimciController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize(Roles = "A,Y")]
         public ActionResult Index()
         {
-            List<Yapimci> y = m.Yapimcis.ToList();
+            List<Developer> y = _dc.Developers.ToList();
             return View(y);
         }
+
         public ActionResult Firma(int? id)
         {
-            Yapimci y;
+            Developer y;
             if (id == null)
             {
-                y = m.Yapimcis.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.User.Identity.Name);
-                id = y.YapimciID;
+                y = _dc.Developers.First(x => x.User.Nickname == HttpContext.User.Identity.Name);
+                id = y.ID;
             }
             else
             {
-                y = m.Yapimcis.FirstOrDefault(x => x.YapimciID == id);
+                y = _dc.Developers.FirstOrDefault(x => x.ID == id);
             }
-            ViewBag.oyun = m.Oyuns.Where(x => x.Yapimci.YapimciID == id).ToList();
+            ViewBag.oyun = _dc.Games.Where(x => x.Developer.ID == id).ToList();
             return View(y);
         }
+
         [HttpGet]
         [Authorize(Roles = "A")]
         public ActionResult Ekle()
         {
-            List<Yapimci> hepsi = m.Yapimcis.ToList();
-            List<Kullanici> bagliKullanici = m.Kullanicis.ToList();
-            foreach (Yapimci x in hepsi)
+            List<Developer> hepsi = _dc.Developers.ToList();
+            List<User> bagliKullanici = _dc.Users.ToList();
+            foreach (Developer d in hepsi)
             {
-                Kullanici tmpK = m.Kullanicis.FirstOrDefault(z => z.KullaniciID == x.KullaniciID);
+                User tmpK = _dc.Users.FirstOrDefault(z => z.ID == d.UserID);
                 bagliKullanici.Remove(tmpK);
             }
             ViewBag.kullanici = bagliKullanici;
-            Yapimci y = new Yapimci();
+            Developer y = new Developer();
             return View(y);
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Ekle(Yapimci y)
+        public ActionResult Ekle(Developer y)
         {
-            Yapimci ypm = m.Yapimcis.FirstOrDefault(x => x.YapimciID == y.YapimciID);
+            Developer ypm = _dc.Developers.FirstOrDefault(x => x.ID == y.ID);
             if (ypm == null)
             {
-                m.Yapimcis.Add(y);
+                _dc.Developers.Add(y);
             }
             else
             {
-                ypm.YapimciAdi = y.YapimciAdi;
-                ypm.KullaniciID = y.KullaniciID;
+                ypm.Name = y.Name;
+                ypm.UserID = y.UserID;
             }
-            m.SaveChanges();
+            ypm.User.Role += "Y";
+            _dc.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         [Authorize(Roles = "A,Y")]
         public ActionResult Guncelle(int id)
         {
-            Kullanici tmpK;
-            List<Yapimci> hepsi = m.Yapimcis.ToList();
-            List<Kullanici> bagliKullanici = m.Kullanicis.ToList();
-            foreach (Yapimci x in hepsi)
+            User tmpK;
+            List<Developer> hepsi = _dc.Developers.ToList();
+            List<User> bagliKullanici = _dc.Users.ToList();
+            foreach (Developer d in hepsi)
             {
-                tmpK = m.Kullanicis.FirstOrDefault(z => z.KullaniciID == x.KullaniciID);
+                tmpK = _dc.Users.FirstOrDefault(z => z.ID == d.ID);
                 bagliKullanici.Remove(tmpK);
             }
-            tmpK = m.Kullanicis.FirstOrDefault(x => x.KullaniciID == m.Yapimcis.FirstOrDefault(z => z.YapimciID == id).KullaniciID);
+            tmpK = _dc.Users.FirstOrDefault(x => x.ID == _dc.Developers.FirstOrDefault(z => z.ID == id).UserID);
             bagliKullanici.Remove(tmpK);
 
             ViewBag.kullanici = bagliKullanici;
-            Yapimci y = m.Yapimcis.FirstOrDefault(x => x.YapimciID == id);
+            Developer y = _dc.Developers.First(x => x.ID == id);
+            ViewBag.yapimci = y;
             return View(y);
         }
+
         [HttpPost]
         [Authorize(Roles = "A,Y")]
-        public ActionResult Guncelle(Yapimci y)
+        public ActionResult Guncelle(Developer y)
         {
-            using (var context = new DOSPEntities())
+            using (var context = new DataContext())
             {
-                var data = context.Yapimcis.FirstOrDefault(x => x.YapimciID == y.YapimciID);
+                var data = context.Developers.FirstOrDefault(x => x.ID == y.ID);
 
                 if (data != null)
                 {
-                    data.YapimciAdi = y.YapimciAdi;
-                    data.KullaniciID = y.KullaniciID;
+                    data.Name = y.Name;
+                    data.UserID = y.UserID;
 
                     context.SaveChanges();
                     return RedirectToAction("Index");
@@ -102,13 +109,14 @@ namespace DOSP.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
         public ActionResult Sil(int id)
         {
-            Yapimci y = m.Yapimcis.FirstOrDefault(x => x.YapimciID == id);
-            m.Yapimcis.Remove(y);
-            m.SaveChanges();
+            Developer y = _dc.Developers.FirstOrDefault(x => x.ID == id);
+            _dc.Developers.Remove(y);
+            _dc.SaveChanges();
             return RedirectToAction("Index");
         }
     }

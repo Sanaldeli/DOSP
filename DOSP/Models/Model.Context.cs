@@ -13,10 +13,10 @@ namespace DOSP.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DOSPEntities : DbContext
+    public partial class DataContext : DbContext
     {
-        public DOSPEntities()
-            : base("name=DOSPEntities")
+        public DataContext()
+            : base("name=DataContext")
         {
         }
     
@@ -25,18 +25,18 @@ namespace DOSP.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<adminRapor> adminRapors { get; set; }
-        public virtual DbSet<adminTicket> adminTickets { get; set; }
-        public virtual DbSet<Kategori> Kategoris { get; set; }
-        public virtual DbSet<Kullanici> Kullanicis { get; set; }
-        public virtual DbSet<Kutuphane> Kutuphanes { get; set; }
-        public virtual DbSet<Oyun> Oyuns { get; set; }
-        public virtual DbSet<Rapor> Rapors { get; set; }
-        public virtual DbSet<RaporKategori> RaporKategoris { get; set; }
-        public virtual DbSet<Sepet> Sepets { get; set; }
-        public virtual DbSet<sepetOyun> sepetOyuns { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<AdminReport> AdminReports { get; set; }
+        public virtual DbSet<AdminTicket> AdminTickets { get; set; }
+        public virtual DbSet<Basket> Baskets { get; set; }
+        public virtual DbSet<BasketGame> BasketGames { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Developer> Developers { get; set; }
+        public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<Library> Libraries { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<ReportCategory> ReportCategories { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<Yapimci> Yapimcis { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

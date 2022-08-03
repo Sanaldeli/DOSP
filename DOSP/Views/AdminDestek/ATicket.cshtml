@@ -21,14 +21,14 @@
         <th>Konu</th>
         <th>Tarih</th>
     </tr>
-    @foreach (Ticket x in Model)
+    @foreach (Ticket t in Model)
     {
         <tr>
-            <td><a href="/AdminDestek/ATicketGoruntule/@x.TicketID">@x.TicketID</a></td>
-            <td>@x.KullaniciID</td>
-            <td>@x.Kullanici.rumuz</td>
-            <td>@x.TicketBasligi</td>
-            <td>@x.TicketTarihi.ToString("dd.MM.yyyy H:mm")</td>
+            <td><a href="/AdminDestek/ATicketGoruntule/@t.ID">@t.ID</a></td>
+            <td>@t.UserID</td>
+            <td>@t.User.Nickname</td>
+            <td>@t.Title</td>
+            <td>@t.CreatedAt.ToString("dd.MM.yyyy H:mm")</td>
         </tr>
     }
 </table>

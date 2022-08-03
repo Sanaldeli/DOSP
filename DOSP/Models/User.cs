@@ -12,44 +12,41 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Kullanici
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Kullanici()
+        public User()
         {
-            this.adminRapors = new HashSet<adminRapor>();
-            this.adminTickets = new HashSet<adminTicket>();
-            this.Kutuphanes = new HashSet<Kutuphane>();
-            this.Rapors = new HashSet<Rapor>();
-            this.Sepets = new HashSet<Sepet>();
-            this.Tables = new HashSet<Table>();
+            this.AdminReports = new HashSet<AdminReport>();
+            this.AdminTickets = new HashSet<AdminTicket>();
+            this.Baskets = new HashSet<Basket>();
+            this.Developers = new HashSet<Developer>();
+            this.Libraries = new HashSet<Library>();
+            this.Reports = new HashSet<Report>();
             this.Tickets = new HashSet<Ticket>();
-            this.Yapimcis = new HashSet<Yapimci>();
         }
     
-        public int KullaniciID { get; set; }
-        public string rumuz { get; set; }
-        public string adSoyad { get; set; }
-        public DateTime kayitTarihi { get; set; }
-        public int bakiye { get; set; }
-        public string sifre { get; set; }
-        public string Rol { get; set; }
+        public int ID { get; set; }
+        public string Nickname { get; set; }
+        public string FullName { get; set; }
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+        public int Wallet { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<adminRapor> adminRapors { get; set; }
+        public virtual ICollection<AdminReport> AdminReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<adminTicket> adminTickets { get; set; }
+        public virtual ICollection<AdminTicket> AdminTickets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kutuphane> Kutuphanes { get; set; }
+        public virtual ICollection<Basket> Baskets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rapor> Rapors { get; set; }
+        public virtual ICollection<Developer> Developers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sepet> Sepets { get; set; }
+        public virtual ICollection<Library> Libraries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Table> Tables { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Yapimci> Yapimcis { get; set; }
     }
 }

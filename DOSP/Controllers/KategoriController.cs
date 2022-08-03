@@ -12,50 +12,54 @@ namespace DOSP.Controllers
 {
     public class KategoriController : Controller
     {
-        private readonly Model m = new Model();
+        private readonly DataContext _dc = new DataContext();
 
         [Authorize]
         public ActionResult Index()
         {
-            List<Kategori> k = m.Kategoris.ToList();
+            List<Category> k = _dc.Categories.ToList();
             return View(k);
         }
+
         [HttpGet]
         [Authorize(Roles = "A")]
         public ActionResult Ekle()
         {
-            Kategori k = new Kategori();
+            Category k = new Category();
             return View(k);
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Ekle(Kategori k)
+        public ActionResult Ekle(Category k)
         {
-            Kategori ktg = m.Kategoris.FirstOrDefault(x => x.KategoriID == k.KategoriID);
+            Category ktg = _dc.Categories.FirstOrDefault(x => x.ID == k.ID);
             if (ktg == null)
             {
-                m.Kategoris.Add(k);
+                _dc.Categories.Add(k);
             }
             else
             {
-                ktg.KategoriAdi = k.KategoriAdi;
+                ktg.Name = k.Name;
             }
-            m.SaveChanges();
+            _dc.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [Authorize(Roles = "A")]
         public ActionResult Guncelle(int id)
         {
-            Kategori k = m.Kategoris.FirstOrDefault(x => x.KategoriID == id);
+            Category k = _dc.Categories.FirstOrDefault(x => x.ID == id);
             return View("Ekle", k);
         }
+
         [HttpPost]
         [Authorize(Roles = "A")]
         public ActionResult Sil(int id)
         {
-            Kategori k = m.Kategoris.FirstOrDefault(x => x.KategoriID == id);
-            m.Kategoris.Remove(k);
-            m.SaveChanges();
+            Category k = _dc.Categories.FirstOrDefault(x => x.ID == id);
+            _dc.Categories.Remove(k);
+            _dc.SaveChanges();
             return RedirectToAction("Index");
         }
     }

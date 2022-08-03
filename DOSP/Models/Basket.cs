@@ -12,18 +12,19 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Kategori
+    public partial class Basket
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Kategori()
+        public Basket()
         {
-            this.Oyuns = new HashSet<Oyun>();
+            this.BasketGames = new HashSet<BasketGame>();
         }
     
-        public int KategoriID { get; set; }
-        public string KategoriAdi { get; set; }
+        public int BasketID { get; set; }
+        public int UserID { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Oyun> Oyuns { get; set; }
+        public virtual ICollection<BasketGame> BasketGames { get; set; }
     }
 }

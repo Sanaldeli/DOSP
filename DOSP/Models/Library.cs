@@ -12,13 +12,13 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Kutuphane
+    public partial class Library
     {
-        public int KutuphaneID { get; set; }
-        public int KullaniciID { get; set; }
-        public int OyunID { get; set; }
+        public int ID { get; set; }
+        public int UserID { get; set; }
+        public int GameID { get; set; }
     
-        public virtual Kullanici Kullanici { get; set; }
-        public virtual Oyun Oyun { get; set; }
+        public virtual Game Game { get; set; }
+        public virtual User User { get; set; }
     }
 }

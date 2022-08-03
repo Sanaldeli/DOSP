@@ -1,13 +1,13 @@
 ﻿@using DOSP.Models
-@model Yapimci
+@model Developer
 
 @{
-    Model m = new Model();
+    DataContext cd = new DataContext();
 
     if (User.IsInRole("Y"))
     {
-        Yapimci y = m.Yapimcis.FirstOrDefault(x => x.Kullanici.rumuz == HttpContext.Current.User.Identity.Name);
-        if (y.YapimciID == Model.YapimciID)
+        Developer d = cd.Developers.FirstOrDefault(x => x.User.Nickname == HttpContext.Current.User.Identity.Name);
+        if (d.ID == Model.ID)
         {
             ViewBag.yapimci = true;
             ViewBag.nav = "yapimci";
@@ -18,7 +18,7 @@
             ViewBag.nav = "magaza";
         }
     }
-    ViewBag.Title = Model.YapimciAdi;
+    ViewBag.Title = Model.Name;
 }
 
 @section nav {
@@ -26,7 +26,7 @@
     {
         <a href="/">Mağaza</a>
     }
-    <a>@Model.YapimciAdi</a>
+    <a>@Model.Name</a>
 }
 
 @section scripts {
@@ -53,7 +53,7 @@
     </script>
 }
 
-<h2 style="text-align: center;">@Model.YapimciAdi</h2>
+<h2 style="text-align: center;">@Model.Name</h2>
 
 @if (ViewBag.yapimci)
 {
@@ -72,19 +72,19 @@
             <th width="140px">Kontrol Tuşları</th>
         }
     </tr>
-    @foreach (Oyun x in ViewBag.oyun)
+    @foreach (Game g in ViewBag.oyun)
     {
         <tr>
-            <td>@x.OyunID</td>
-            <td><a href="/Magaza/Oyun/@x.OyunID">@x.OyunAdi</a></td>
-            <td>@x.OyunFiyati</td>
-            <td>@x.Kategori.KategoriAdi</td>
-            <td>@x.CikisTarihi.ToString("dd.MM.yyyy")</td>
+            <td>@g.ID</td>
+            <td><a href="/Magaza/Oyun/@g.ID">@g.Title</a></td>
+            <td>@g.Price</td>
+            <td>@g.Category.Name</td>
+            <td>@g.ReleaseDate.ToString("dd.MM.yyyy")</td>
             @if (ViewBag.yapimci)
             {
                 <td>
-                    <a href="/Magaza/Duzenle/@x.OyunID" class="btn btn-green btn-left">Güncelle</a>
-                    <a class="btn btn-red btn-right" id="sil" data-oid="@x.OyunID">Sil</a>
+                    <a href="/Magaza/Duzenle/@g.ID" class="btn btn-green btn-left">Güncelle</a>
+                    <a class="btn btn-red btn-right" id="sil" data-oid="@g.ID">Sil</a>
                 </td>
             }
         </tr>

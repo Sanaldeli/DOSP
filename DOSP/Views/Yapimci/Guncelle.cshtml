@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model Yapimci
+@model Developer
 
 @{
     ViewBag.Title = "Yapımcı Güncelle";
@@ -17,16 +17,16 @@
 <form action="/Yapimci/Guncelle" method="post" role="form" class="form-content">
     @if (Model != null)
     {
-        <input type="hidden" name="YapimciID" value="@Model.YapimciID" />
+        <input type="hidden" name="ID" value="@Model.ID" />
     }
 
-    <input class="form-ctrl" value="@Model.YapimciAdi" type="text" name="YapimciAdi" placeholder="Firma adını giriniz" required />
+    <input class="form-ctrl" value="@Model.Name" type="text" name="Name" placeholder="Firma adını giriniz" required />
 
-    <select class="form-ctrl" name="KullaniciID" required>
-        <option value="@Model.KullaniciID" selected>@Model.Kullanici.rumuz</option>
-        @foreach (Kullanici k in ViewBag.kullanici)
+    <select class="form-ctrl" name="UserID" required>
+        <option value="@Model.UserID" selected>@Model.User.Nickname</option>
+        @foreach (User u in ViewBag.kullanici)
         {
-            <option value="@k.KullaniciID">@k.rumuz</option>
+            <option value="@u.ID">@u.Nickname</option>
         }
     </select>
     <button type="submit" class="btn btn-yellow">Kaydet</button>

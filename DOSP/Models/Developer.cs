@@ -12,20 +12,20 @@ namespace DOSP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Yapimci
+    public partial class Developer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Yapimci()
+        public Developer()
         {
-            this.Oyuns = new HashSet<Oyun>();
+            this.Games = new HashSet<Game>();
         }
     
-        public int YapimciID { get; set; }
-        public string YapimciAdi { get; set; }
-        public Nullable<int> KullaniciID { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> UserID { get; set; }
     
-        public virtual Kullanici Kullanici { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Oyun> Oyuns { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
+        public virtual User User { get; set; }
     }
 }

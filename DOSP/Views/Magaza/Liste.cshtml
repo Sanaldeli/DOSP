@@ -1,5 +1,5 @@
 ﻿@using DOSP.Models
-@model List<Oyun>
+@model List<Game>
 
 @{
     ViewBag.Title = "Oyun Listesi";
@@ -44,17 +44,17 @@
         <th>Kategori</th>
         <th width="140px">Kontrol Tuşları</th>
     </tr>
-    @foreach (Oyun o in Model)
+    @foreach (Game g in Model)
     {
         <tr>
-            <td>@o.OyunID</td>
-            <td>@o.OyunAdi</td>
-            <td>@o.OyunFiyati</td>
-            <td>@o.Yapimci.YapimciAdi</td>
-            <td>@o.Kategori.KategoriAdi</td>
+            <td>@g.ID</td>
+            <td>@g.Title</td>
+            <td>@g.Price</td>
+            <td>@g.Developer.Name</td>
+            <td>@g.Category.Name</td>
             <td>
-                <a href="/Magaza/Duzenle/@o.OyunID" class="btn btn-green btn-left">Güncelle</a>
-                <a class="btn btn-red btn-right" id="sil" data-oid="@o.OyunID">Sil</a>
+                <a href="/Magaza/Duzenle/@g.ID" class="btn btn-green btn-left">Güncelle</a>
+                <a class="btn btn-red btn-right" id="sil" data-oid="@g.ID">Sil</a>
             </td>
         </tr>
     }

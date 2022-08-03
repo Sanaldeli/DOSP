@@ -23,10 +23,10 @@
         @foreach (Ticket x in ViewBag.Ticket)
         {
             <tr>
-                <td><a href="/Destek/TicketGoruntule/@x.TicketID">@x.TicketID</a></td>
-                <td>@x.Kullanici.rumuz</td>
-                <td>@x.TicketBasligi</td>
-                <td>@x.TicketTarihi.ToString("dd.MM.yyyy H:mm")</td>
+                <td><a href="/Destek/TicketGoruntule/@x.ID">@x.ID</a></td>
+                <td>@x.User.Nickname</td>
+                <td>@x.Title</td>
+                <td>@x.CreatedAt.ToString("dd.MM.yyyy H:mm")</td>
             </tr>
         }
     </table>
@@ -45,13 +45,13 @@ else
             <th>Kullanıcı</th>
             <th>Rapor Tarihi</th>
         </tr>
-        @foreach (Rapor x in ViewBag.Rapor)
+        @foreach (Report r in ViewBag.Rapor)
         {
             <tr>
-                <td><a href="/Destek/RaporGoruntule/@x.RaporID">@x.RaporID</a></td>
-                <td>@x.RaporKategori.KategoriAdi</td>
-                <td>@x.Kullanici.rumuz</td>
-                <td>@x.RaporTarihi.ToString("dd.MM.yyyy H:mm")</td>
+                <td><a href="/Destek/RaporGoruntule/@r.ID">@r.ID</a></td>
+                <td>@r.ReportCategory.Name</td>
+                <td>@r.User.Nickname</td>
+                <td>@r.ReportDate.ToString("dd.MM.yyyy H:mm")</td>
             </tr>
         }
     </table>

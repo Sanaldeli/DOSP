@@ -38,10 +38,10 @@ namespace DOSP.Controllers
 
         public override string[] GetRolesForUser(string username)
         {
-            using (DOSPEntities _context = new DOSPEntities())
+            using (var _context = new DataContext())
             {
-                Kullanici user = _context.Kullanicis.FirstOrDefault(x => x.rumuz == username);
-                char[] roles = user.Rol.ToCharArray();
+                User user = _context.Users.FirstOrDefault(x => x.Nickname == username);
+                char[] roles = user.Role.ToCharArray();
                 string[] tips = new string[roles.Length];
                 for(int i = 0; i < roles.Length; i++)
                 {
