@@ -28,8 +28,9 @@ namespace DOSP.Models
         public string Description { get; set; }
         public int DeveloperID { get; set; }
         public int CategoryID { get; set; }
-        public DateTime ReleaseDate { get; set; } = DateTime.Now;
-
+        public System.DateTime ReleaseDate { get; set; }
+        public string CoverPhoto { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BasketGame> BasketGames { get; set; }
         public virtual Category Category { get; set; }

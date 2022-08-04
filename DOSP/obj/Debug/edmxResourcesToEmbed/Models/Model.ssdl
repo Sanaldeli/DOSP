@@ -44,8 +44,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="255" />
-    <Property Name="UserID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Game">
     <Key>
@@ -57,7 +57,8 @@
     <Property Name="Description" Type="nvarchar" MaxLength="512" />
     <Property Name="DeveloperID" Type="int" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
-    <Property Name="ReleaseDate" Type="datetime2" Precision="7" />
+    <Property Name="ReleaseDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="CoverPhoto" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Library">
     <Key>
@@ -74,7 +75,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
-    <Property Name="ReportDate" Type="datetime2" Precision="7" />
+    <Property Name="ReportDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="GameID" Type="int" Nullable="false" />
   </EntityType>
@@ -102,7 +103,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
-    <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+    <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
   </EntityType>
@@ -112,11 +113,12 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nickname" Type="nvarchar" MaxLength="16" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="32" />
-    <Property Name="RegistrationDate" Type="datetime2" Precision="7" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Wallet" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="Role" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="ProfilePicture" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK__adminRapo__Kulla__7DCDAAA2">
     <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -299,7 +301,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Yapimci__Kullani__6B79F03D">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Developer" Type="Self.Developer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">

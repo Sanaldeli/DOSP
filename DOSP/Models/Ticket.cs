@@ -22,7 +22,7 @@ namespace DOSP.Models
     
         public int ID { get; set; }
         public int UserID { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public System.DateTime CreatedAt { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
     

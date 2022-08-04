@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8b1bba64c8d147c08435737a65a5ede6" Name="Diagram1">
+      <Diagram DiagramId="e308ffc7ba7b41e4948afd361ff29098" Name="Diagram1">
         <EntityTypeShape EntityType="DOSPModel.AdminReport" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.AdminTicket" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.Basket" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.BasketGame" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.Category" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.Developer" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DOSPModel.Game" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DOSPModel.Game" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.Library" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.Report" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DOSPModel.ReportCategory" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />

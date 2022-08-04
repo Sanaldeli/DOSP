@@ -6,9 +6,7 @@
         DataContext dc = new DataContext();
         User k = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
         Basket s = dc.Baskets.FirstOrDefault(x => x.UserID == k.ID);
-        ViewBag.id = k.ID;
-        ViewBag.rumuz = k.Nickname;
-        ViewBag.bakiye = k.Wallet;
+        ViewBag.User = k;
         int sepetSayisi = dc.BasketGames.Where(x => x.BasketID == s.BasketID && !x.isPaid).ToList().Count;
         if (sepetSayisi == 0)
         {
@@ -60,17 +58,17 @@
                 {
                     <div class="header-profile">
                         <div class="header-holder">
-                            <div class="header-username"><a id="profile-linker" href="/Profil" title="Profiline git">@ViewBag.rumuz</a></div>
+                            <div class="header-username"><a id="profile-linker" href="/Profil" title="Profiline git">@ViewBag.User.Nickname</a></div>
                             <div class="header-basket">
                                 <a href="/Sepet" title="Sepete git">
                                     <i class="fas fa-shopping-basket"></i>
                                     <span>Sepet @ViewBag.sepet</span>
                                 </a>
-                                <div class="header-wallet">@ViewBag.bakiye</div>
+                                <div class="header-wallet">@ViewBag.User.Wallet</div>
                             </div>
                             <div class="header-log"><a id="logging" href="/Giris/Cikis">Çıkış yap</a></div>
                         </div>
-                        <div class="header-pic"><img src="~/Content/Assets/Images/default-pp.jpg" /></div>
+                        <div class="header-pic"><img src="~/Content/Assets/Images/@ViewBag.User.ProfilePicture" /></div>
                     </div>
                 }
                 else

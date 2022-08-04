@@ -29,10 +29,11 @@ namespace DOSP.Models
         public int ID { get; set; }
         public string Nickname { get; set; }
         public string FullName { get; set; }
-        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+        public System.DateTime RegistrationDate { get; set; }
         public int Wallet { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public string ProfilePicture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminReport> AdminReports { get; set; }

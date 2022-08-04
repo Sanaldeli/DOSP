@@ -64,6 +64,7 @@
           <ScalarProperty Name="DeveloperID" ColumnName="DeveloperID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="CoverPhoto" ColumnName="CoverPhoto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -129,6 +130,7 @@
           <ScalarProperty Name="Wallet" ColumnName="Wallet" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

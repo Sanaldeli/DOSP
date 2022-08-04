@@ -49,8 +49,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="UserID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -62,7 +62,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="512" />
           <Property Name="DeveloperID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="ReleaseDate" Type="datetime2" Precision="7" />
+          <Property Name="ReleaseDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CoverPhoto" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Library">
           <Key>
@@ -79,7 +80,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="ReportDate" Type="datetime2" Precision="7" />
+          <Property Name="ReportDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="GameID" Type="int" Nullable="false" />
         </EntityType>
@@ -107,7 +108,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
@@ -117,11 +118,12 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nickname" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="FullName" Type="nvarchar" MaxLength="32" />
-          <Property Name="RegistrationDate" Type="datetime2" Precision="7" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Wallet" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="Role" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ProfilePicture" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK__adminRapo__Kulla__7DCDAAA2">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -304,7 +306,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Yapimci__Kullani__6B79F03D">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Developer" Type="Self.Developer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -452,8 +454,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Games" Relationship="Self.FK__Oyun__YapimciID__035179CE" FromRole="Developer" ToRole="Game" />
           <NavigationProperty Name="User" Relationship="Self.FK__Yapimci__Kullani__6B79F03D" FromRole="Developer" ToRole="User" />
         </EntityType>
@@ -467,7 +469,8 @@
           <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="DeveloperID" Type="Int32" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="ReleaseDate" Type="DateTime" Precision="7" />
+          <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CoverPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="BasketGames" Relationship="Self.FK__sepetOyun__OyunI__0539C240" FromRole="Game" ToRole="BasketGame" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Oyun__KategoriID__025D5595" FromRole="Game" ToRole="Category" />
           <NavigationProperty Name="Developer" Relationship="Self.FK__Oyun__YapimciID__035179CE" FromRole="Game" ToRole="Developer" />
@@ -491,7 +494,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ReportDate" Type="DateTime" Precision="7" />
+          <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GameID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AdminReports" Relationship="Self.FK__adminRapo__Rapor__7CD98669" FromRole="Report" ToRole="AdminReport" />
@@ -524,7 +527,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdminTickets" Relationship="Self.FK__adminTick__Ticke__7EC1CEDB" FromRole="Ticket" ToRole="AdminTicket" />
@@ -536,11 +539,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nickname" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FullName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="RegistrationDate" Type="DateTime" Precision="7" />
+          <Property Name="FullName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Wallet" Type="Int32" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AdminReports" Relationship="Self.FK__adminRapo__Kulla__7DCDAAA2" FromRole="User" ToRole="AdminReport" />
           <NavigationProperty Name="AdminTickets" Relationship="Self.FK__adminTick__Kulla__7FB5F314" FromRole="User" ToRole="AdminTicket" />
           <NavigationProperty Name="Baskets" Relationship="Self.FK__Sepet__Kullanici__22751F6C" FromRole="User" ToRole="Basket" />
@@ -658,7 +662,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Yapimci__Kullani__6B79F03D">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Developer" Type="Self.Developer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -889,6 +893,7 @@
                 <ScalarProperty Name="DeveloperID" ColumnName="DeveloperID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="CoverPhoto" ColumnName="CoverPhoto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -954,6 +959,7 @@
                 <ScalarProperty Name="Wallet" ColumnName="Wallet" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

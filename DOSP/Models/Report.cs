@@ -23,7 +23,7 @@ namespace DOSP.Models
         public int ID { get; set; }
         public int CategoryID { get; set; }
         public int UserID { get; set; }
-        public DateTime ReportDate { get; set; } = DateTime.Now;
+        public System.DateTime ReportDate { get; set; }
         public string Description { get; set; }
         public int GameID { get; set; }
     

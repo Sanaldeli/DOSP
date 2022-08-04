@@ -8,6 +8,7 @@ namespace DOSP.Controllers
     public class MagazaController : Controller
     {
         private readonly DataContext _dc = new DataContext();
+
         public ActionResult Index()
         {
             List<Game> o = _dc.Games.ToList();
@@ -54,17 +55,9 @@ namespace DOSP.Controllers
         [Authorize(Roles = "A,Y")]
         public ActionResult Ekle(Game o)
         {
-            _dc.Games.Add(new Game
-            {
-                ID = o.ID,
-                Title = o.Title,
-                Price = o.Price,
-                Description = o.Description,
-                DeveloperID = o.DeveloperID,
-                CategoryID = o.CategoryID,
-                ReleaseDate = System.DateTime.Now
-            });
+            _dc.Games.Add(o);
             _dc.SaveChanges();
+
             return RedirectToAction("Liste");
         }
 
@@ -74,35 +67,32 @@ namespace DOSP.Controllers
         {
             ViewBag.oyun = _dc.Games.ToList();
             ViewBag.ktg = _dc.Categories.ToList();
-            using (var context = new DataContext())
-            {
-                var data = context.Games.Where(x => x.ID == id).SingleOrDefault();
-                ViewBag.yapimci = _dc.Developers.First(d => d.User.Nickname == HttpContext.User.Identity.Name);
-                return View(data);
-            }
+
+            var data = _dc.Games.Where(x => x.ID == id).SingleOrDefault();
+            ViewBag.yapimci = _dc.Developers.First(d => d.User.Nickname == HttpContext.User.Identity.Name);
+
+            return View(data);
         }
 
         [HttpPost]
         [Authorize(Roles = "A,Y")]
         public ActionResult Duzenle(Game o)
         {
-            using (var context = new DataContext())
+            var data = _dc.Games.FirstOrDefault(x => x.ID == o.ID);
+
+            if (data != null)
             {
-                var data = context.Games.FirstOrDefault(x => x.ID == o.ID);
+                data.Title = o.Title;
+                data.Price = o.Price;
+                data.Description = o.Description;
+                data.CategoryID = o.CategoryID;
+                data.ReleaseDate = o.ReleaseDate;
 
-                if (data != null)
-                {
-                    data.Title = o.Title;
-                    data.Price = o.Price;
-                    data.Description = o.Description;
-                    data.CategoryID = o.CategoryID;
-                    data.DeveloperID = o.DeveloperID;
-                    context.SaveChanges();
+                _dc.SaveChanges();
 
-                    return RedirectToAction("Liste");
-                }
-                return View();
+                return RedirectToAction("Liste");
             }
+            return View();
         }
 
         [HttpPost]
