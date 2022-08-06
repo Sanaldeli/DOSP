@@ -39,19 +39,15 @@ namespace DOSP.Controllers
         {
             User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
 
-            if (ModelState.IsValid)
-            {
-                using (DataContext db = new DataContext())
-                {
-                    t.UserID = k.ID;
-                    t.CreatedAt = DateTime.Now;
-                    db.Configuration.ValidateOnSaveEnabled = false;
-                    db.Tickets.Add(t);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            return View();
+            if (!ModelState.IsValid)
+                return View();
+
+            t.UserID = k.ID;
+            t.CreatedAt = DateTime.Now;
+            _dc.Configuration.ValidateOnSaveEnabled = false;
+            _dc.Tickets.Add(t);
+            _dc.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -69,19 +65,15 @@ namespace DOSP.Controllers
         {
             User k = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
 
-            if (ModelState.IsValid)
-            {
-                using (DataContext db = new DataContext())
-                {
-                    r.UserID = k.ID;
-                    r.ReportDate = DateTime.Now;
-                    db.Configuration.ValidateOnSaveEnabled = false;
-                    db.Reports.Add(r);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            return View();
+            if (!ModelState.IsValid)
+                return View();
+
+            r.UserID = k.ID;
+            r.ReportDate = DateTime.Now;
+            _dc.Configuration.ValidateOnSaveEnabled = false;
+            _dc.Reports.Add(r);
+            _dc.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [Authorize]

@@ -94,20 +94,16 @@ namespace DOSP.Controllers
         [Authorize(Roles = "A,Y")]
         public ActionResult Guncelle(Developer y)
         {
-            using (var context = new DataContext())
-            {
-                var data = context.Developers.FirstOrDefault(x => x.ID == y.ID);
+            var data = _dc.Developers.FirstOrDefault(x => x.ID == y.ID);
 
-                if (data != null)
-                {
-                    data.Name = y.Name;
-                    data.UserID = y.UserID;
-
-                    context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+            if (data is null)
                 return View();
-            }
+
+            data.Name = y.Name;
+            data.UserID = y.UserID;
+
+            _dc.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

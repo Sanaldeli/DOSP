@@ -31,7 +31,7 @@
     <input type="hidden" name="ID" value="@Model.ID" />
 
     <label for="rumuz">Nickname</label>
-    <input type="text" class="form-ctrl" placeholder="Rumuz" name="Nickname" value="@Model.Nickname" required />
+    <input type="text" class="form-ctrl" placeholder="Rumuz" name="Nickname" value="@Model.Nickname" disabled />
 
     <label for="adSoyad">İsim Soyisim</label>
     <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
@@ -40,7 +40,8 @@
     <input type="number" class="form-ctrl" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
 
     <label for="Şifre">Şifre</label>
-    <input type="text" class="form-ctrl" placeholder="Kullanıcı şifresi" name="Password" value="@Model.Password" />
+    <input type="password" class="form-ctrl" placeholder="Mevcut şifreniz" name="CandidatePassword" />
+
     <div style="float: left;">
         @Html.CheckBox("yapimci", inRole('Y'))
         <label for="yapimci" style="line-height: 15px; font-size: 12px; width: fit-content">Yapımcı</label>

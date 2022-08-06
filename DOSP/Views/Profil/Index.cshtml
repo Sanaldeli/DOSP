@@ -20,7 +20,7 @@
 }
 
 <div class="user-header">
-    <img class="user-img" src="~/Content/Assets/Images/@Model.ProfilePicture" />
+    <img class="user-img" src="~/Content/Images/users/@Model.ProfilePicture" />
     <h2 id="regdate">@Model.RegistrationDate.ToString("dd MMMM yyyy")</h2>
     <h1 class="username">@Model.Nickname</h1>
     <br />
@@ -35,7 +35,7 @@
     @foreach (Library l in ViewBag.kutuphane)
     {
         <div class="user-game">
-            <img src="~/Content/Assets/Images/gcont/@l.GameID/cover.jpg" />
+            <img src="~/Content/Images/gcont/@l.Game.CoverPhoto" />
             <a href="/Magaza/Oyun/@l.GameID">@l.Game.Title</a>
         </div>
         if (++i >= 4)

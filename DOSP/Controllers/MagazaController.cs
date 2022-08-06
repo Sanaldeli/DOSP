@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DOSP.Models;
+using Microsoft.AspNetCore.Http;
+using System;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace DOSP.Controllers
 {
@@ -24,6 +30,7 @@ namespace DOSP.Controllers
                 ViewBag.oyun = _dc.Games.Where(x => x.Title.Contains(ara)).ToList();
                 ViewBag.yapimci = _dc.Developers.Where(x => x.Name.Contains(ara)).ToList();
             }
+
             return View();
         }
 
@@ -44,7 +51,6 @@ namespace DOSP.Controllers
         [Authorize(Roles = "Y")]
         public ActionResult Ekle()
         {
-            ViewBag.oyun = _dc.Games.ToList();
             ViewBag.ktg = _dc.Categories.ToList();
             Developer d = _dc.Developers.First(x => x.User.Nickname == HttpContext.User.Identity.Name);
 
@@ -53,9 +59,23 @@ namespace DOSP.Controllers
 
         [HttpPost]
         [Authorize(Roles = "A,Y")]
-        public ActionResult Ekle(Game o)
+        public ActionResult Ekle(Game o, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                var randomName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                var path = Path.Combine(Server.MapPath("~/Content/Images/gcont"), randomName);
+                o.CoverPhoto = randomName;
+
+                file.SaveAs(path);
+            }
+            else
+            {
+                o.CoverPhoto = "game-photo.jpg";
+            }
+
             _dc.Games.Add(o);
+
             _dc.SaveChanges();
 
             return RedirectToAction("Liste");
@@ -69,30 +89,41 @@ namespace DOSP.Controllers
             ViewBag.ktg = _dc.Categories.ToList();
 
             var data = _dc.Games.Where(x => x.ID == id).SingleOrDefault();
-            ViewBag.yapimci = _dc.Developers.First(d => d.User.Nickname == HttpContext.User.Identity.Name);
+            ViewBag.yapimci = _dc.Developers.FirstOrDefault(d => d.User.Nickname == HttpContext.User.Identity.Name);
 
             return View(data);
         }
 
         [HttpPost]
         [Authorize(Roles = "A,Y")]
-        public ActionResult Duzenle(Game o)
+        public ActionResult Duzenle(Game o, HttpPostedFileBase file)
         {
             var data = _dc.Games.FirstOrDefault(x => x.ID == o.ID);
 
-            if (data != null)
+            if (data is null)
             {
-                data.Title = o.Title;
-                data.Price = o.Price;
-                data.Description = o.Description;
-                data.CategoryID = o.CategoryID;
-                data.ReleaseDate = o.ReleaseDate;
-
-                _dc.SaveChanges();
-
-                return RedirectToAction("Liste");
+                ViewBag.error = "Oyun bulunamadı.";
+                return View();
             }
-            return View();
+
+            data.Title = o.Title;
+            data.Price = o.Price;
+            data.Description = o.Description;
+            data.CategoryID = o.CategoryID;
+            data.ReleaseDate = o.ReleaseDate;
+
+            if (file != null)
+            {
+                var randomName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                var path = Path.Combine(Server.MapPath("~/Content/Images/gcont"), randomName);
+                data.CoverPhoto = randomName;
+
+                file.SaveAs(path);
+            }
+
+            _dc.SaveChanges();
+
+            return RedirectToAction("Liste");
         }
 
         [HttpPost]

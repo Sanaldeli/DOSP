@@ -1,0 +1,38 @@
+﻿.sup-cont {
+    width: 50%;
+    height: 150px;
+    background: #ccc;
+    border-radius: var(--gap);
+    text-align: center;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+}
+
+    .sup-cont > h1 {
+        color: var(--darkbyzantium);
+        line-height: 150px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .sup-cont > i {
+        position: absolute;
+        bottom: var(--gap);
+        right: var(--gap);
+        color: #F3779344;
+        font-size: 50px;
+        transform: rotateZ(-20deg);
+    }
+
+    .sup-cont:hover > i {
+        color: #F37793;
+    }
+
+.report, .prev-ticket {
+    float: left;
+}
+
+.ticket, .new-ticket {
+    float: right;
+}

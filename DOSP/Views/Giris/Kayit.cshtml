@@ -14,16 +14,12 @@
     <div class="form-content">
         <label for="rumuz">Kullanıcı Adı</label>
         @Html.TextBoxFor(m => m.Nickname, new { @class = "form-ctrl", @placeholder = "Kullanıcı Adı" })
-        @if (ViewBag.error != null)
-        {
-            <p>@ViewBag.error</p>
-        }
 
         <label for="adSoyad">İsim Soyisim</label>
         @Html.TextBoxFor(m => m.FullName, new { @class = "form-ctrl", @placeholder = "İsim Soyisim" })
 
         <label for="sifre">Şifre</label>
-        @Html.PasswordFor(m => m.Password, new { @class = "form-ctrl", @placeholder = "Şifre" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-ctrl", @placeholder = "Parola" })
 
         <input type="submit" class="btn btn-yellow" value="Kayıt Ol" />
     </div>

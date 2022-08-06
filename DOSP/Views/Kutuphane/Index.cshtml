@@ -14,7 +14,7 @@
 @foreach (var l in Model)
 {
     <div class="cart-item">
-        <img src="~/Content/Assets/Images/game-photo.jpg" />
+        <img src="~/Content/Images/gcont/@l.Game.CoverPhoto" />
         <a href="~/Magaza/Oyun/@l.GameID" class="name">@l.Game.Title</a>
     </div>
 }

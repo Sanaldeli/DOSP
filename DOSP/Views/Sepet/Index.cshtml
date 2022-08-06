@@ -64,7 +64,7 @@
     foreach (BasketGame bG in Model)
     {
         <div class="cart-item">
-            <img src="~/Content/Assets/Images/game-photo.jpg" />
+            <img src="~/Content/Images/gcont/@bG.Game.CoverPhoto" />
             <a href="~/Magaza/Oyun/@bG.GameID" class="name">@bG.Game.Title</a>
             <div class="cart-price">
                 <a class="fas fa-times" id="remove" data-sid="@bG.ID" title="Sepetten Kaldır"></a>

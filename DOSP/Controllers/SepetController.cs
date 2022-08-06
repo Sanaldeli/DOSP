@@ -52,17 +52,17 @@ namespace DOSP.Controllers
         public ActionResult SatinAl(int id)     //id: SepetID
         {
             List<BasketGame> s = _dc.BasketGames.Where(x => x.BasketID == id).ToList();
-            User u = _dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.User.Identity.Name);
-            Library l = new Library();
+            User u = _dc.Users.First(x => x.Nickname == HttpContext.User.Identity.Name);
             int total = 0;
             foreach (var bG in s)
             {
                 if (!bG.isPaid)
                 {
-                    l.UserID = bG.Basket.UserID;
-                    l.GameID = bG.GameID;
-                    _dc.Libraries.Add(l);
-                    _dc.SaveChanges();
+                    _dc.Libraries.Add(new Library
+                    {
+                        UserID = bG.Basket.UserID,
+                        GameID = bG.GameID
+                    });
                     total += bG.Game.Price;
                 }
                 bG.isPaid = true;

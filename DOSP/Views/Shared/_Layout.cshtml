@@ -7,7 +7,8 @@
         User k = dc.Users.FirstOrDefault(x => x.Nickname == HttpContext.Current.User.Identity.Name);
         Basket s = dc.Baskets.FirstOrDefault(x => x.UserID == k.ID);
         ViewBag.User = k;
-        int sepetSayisi = dc.BasketGames.Where(x => x.BasketID == s.BasketID && !x.isPaid).ToList().Count;
+        int sepetSayisi = dc.BasketGames.Count(x => x.BasketID == s.BasketID && !x.isPaid);
+
         if (sepetSayisi == 0)
         {
             ViewBag.sepet = null;
@@ -20,7 +21,7 @@
         if (User.IsInRole("Y"))
         {
             ViewBag.yapimci = dc.Developers.FirstOrDefault(x => x.User.Nickname == HttpContext.Current.User.Identity.Name).Name;
-        } 
+        }
         else
         {
             ViewBag.yapimci = null;
@@ -32,16 +33,16 @@
 <html>
 <head>
     <title>@ViewBag.Title - DOST</title>
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Styles.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Header.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Content.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/Footer.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageStore.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageGame.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageCart.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageUser.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageSupport.css">
-    <link type="text/css" rel="stylesheet" href="~/Content/Assets/css/PageAdmin.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/Styles.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/Header.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/Content.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/Footer.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageStore.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageGame.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageCart.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageUser.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageSupport.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/PageAdmin.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -68,7 +69,7 @@
                             </div>
                             <div class="header-log"><a id="logging" href="/Giris/Cikis">Çıkış yap</a></div>
                         </div>
-                        <div class="header-pic"><img src="~/Content/Assets/Images/@ViewBag.User.ProfilePicture" /></div>
+                        <div class="header-pic"><img src="~/Content/Images/users/@ViewBag.User.ProfilePicture" /></div>
                     </div>
                 }
                 else
@@ -93,7 +94,7 @@
                         {
                             <a id="aPanel" href="/AdminPaneli">Admin Paneli</a>
                         }
-                        
+
                         if (User.IsInRole("Y"))
                         {
 
@@ -112,6 +113,11 @@
     </div>
     <div class="content">
         <div class="content-main">
+            @if (ViewBag.error != null)
+            {
+                <div class="error-popup">@ViewBag.error</div>
+            }
+
             <div class="content-nav">
                 @RenderSection("nav", false)
             </div>
@@ -129,7 +135,7 @@
     </div>
 
     <script>
-        $("#@ViewBag.Nav").addClass("aktif");
+        $("a#@ViewBag.nav").addClass("aktif");
     </script>
     @RenderSection("scripts", false)
 </body>

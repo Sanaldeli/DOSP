@@ -116,7 +116,7 @@
     <Property Name="FullName" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="RegistrationDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Wallet" Type="int" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="60" Nullable="false" />
     <Property Name="Role" Type="nvarchar" MaxLength="3" Nullable="false" />
     <Property Name="ProfilePicture" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>

@@ -121,7 +121,7 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="RegistrationDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Wallet" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Role" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="ProfilePicture" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -542,7 +542,7 @@
           <Property Name="FullName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Wallet" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProfilePicture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AdminReports" Relationship="Self.FK__adminRapo__Kulla__7DCDAAA2" FromRole="User" ToRole="AdminReport" />

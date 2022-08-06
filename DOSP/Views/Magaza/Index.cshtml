@@ -95,7 +95,7 @@
         @foreach (Game g in Model)
         {
             <div class="game-content" data-ktgid="@g.CategoryID">
-                <img src="~/Content/Assets/Images/@g.CoverPhoto" />
+                <img src="~/Content/Images/gcont/@g.CoverPhoto" />
                 <div class="game-desc">
                     <a href="/Magaza/Oyun/@g.ID">@g.Title</a>
                     <h1>Yapımcı: <a href="/Yapimci/Firma/@g.DeveloperID">@g.Developer.Name</a> | Kategori: @g.Category.Name</h1>

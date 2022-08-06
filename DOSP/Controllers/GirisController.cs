@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DOSP.Models;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace DOSP.Controllers
 {
@@ -15,33 +16,28 @@ namespace DOSP.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                Console.WriteLine(HttpContext.User.Identity);
-                return RedirectToAction("Index", "Magaza");
-            }
+            if (!HttpContext.User.Identity.IsAuthenticated)
+                return View();
 
-            ViewBag.kullanici = _dc.Users.ToList();
-            ViewBag.yapimci = _dc.Developers.ToList();
-            return View();
+            return RedirectToAction("Index", "Magaza");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(User k, string ReturnUrl)
         {
-            User tmpk = _dc.Users.FirstOrDefault(x => x.Nickname == k.Nickname && x.Password == k.Password);
-            if (tmpk != null)
+            User user = _dc.Users.FirstOrDefault(x => x.Nickname == k.Nickname);
+            if (user is null || !BCryptNet.Verify(k.Password, user.Password))
             {
-                FormsAuthentication.SetAuthCookie(tmpk.Nickname, false);
-                if (!string.IsNullOrEmpty(ReturnUrl))
-                {
-                    return Redirect(ReturnUrl);
-                }
-                return RedirectToAction("Index", "Magaza");
+                ViewBag.error = "Kullanıcı adı veya parola hatalı.";
+                return View();
             }
-            ViewBag.error = "Kullanıcı adı veya parola hatalı.";
-            return View();
+
+            FormsAuthentication.SetAuthCookie(user.Nickname, false);
+            if (!string.IsNullOrEmpty(ReturnUrl))
+                return Redirect(ReturnUrl);
+
+            return RedirectToAction("Index", "Magaza");
         }
 
         public ActionResult Kayit()
@@ -53,30 +49,29 @@ namespace DOSP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Kayit(User k)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View();
+
+            if (_dc.Users.Any(u => u.Nickname == k.Nickname))
             {
-                using (DataContext db = new DataContext())
-                {
-                    var check = db.Users.FirstOrDefault(s => s.Nickname == k.Nickname);
-                    if (check == null)
-                    {
-                        k.RegistrationDate = DateTime.Now;
-                        db.Configuration.ValidateOnSaveEnabled = false;
-                        k.Role = "K";
-                        db.Users.Add(k);
-                        Basket s = new Basket
-                        {
-                            UserID = k.ID
-                        };
-                        db.Baskets.Add(s);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    ViewBag.error = "Bu rumuz daha önce alınmış";
-                    return View();
-                }
+                ViewBag.error = "Bu kullanıcı adı daha önce alınmış";
+                return View();
             }
-            return View();
+
+            k.Password = BCryptNet.HashPassword(inputKey: k.Password, workFactor: 12);
+
+            _dc.Configuration.ValidateOnSaveEnabled = false;
+            _dc.Users.Add(k);
+
+            Basket s = new Basket
+            {
+                UserID = k.ID
+            };
+            _dc.Baskets.Add(s);
+
+            _dc.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [Authorize]

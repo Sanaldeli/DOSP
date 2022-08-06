@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DOSP.Models;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace DOSP.Controllers
 {
@@ -22,44 +23,43 @@ namespace DOSP.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Guncelle(int id)
         {
-            using (var context = new DataContext())
-            {
-                var data = context.Users.Where(x => x.ID == id).SingleOrDefault();
-                return View(data);
-            }
+            var data = _dc.Users.Where(x => x.ID == id).SingleOrDefault();
+            return View(data);
         }
 
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Guncelle(User k, bool admin, bool yapimci)
+        public ActionResult Guncelle(User k, string CandidatePassword, bool admin, bool yapimci)
         {
-            using (var context = new DataContext())
+            var user = _dc.Users.First(x => x.ID == k.ID);
+
+            if (user is null)
             {
-                var data = context.Users.FirstOrDefault(x => x.ID == k.ID);
-
-                if (data != null)
-                {
-                    data.Nickname = k.Nickname;
-                    data.FullName = k.FullName;
-                    data.Wallet = k.Wallet;
-                    data.Password = k.Password;
-
-                    string roller = "K";
-                    if (admin)
-                    {
-                        roller += "A";
-                    }
-                    if (yapimci)
-                    {
-                        roller += "Y";
-                    }
-                    data.Role = roller;
-
-                    context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                ViewBag.error = "Kullanıcı bulunamadı.";
                 return View();
             }
+
+            user.Nickname = k.Nickname;
+            user.FullName = k.FullName;
+            user.Wallet = k.Wallet;
+
+            if (!string.IsNullOrEmpty(CandidatePassword))
+                user.Password = BCryptNet.HashPassword(k.Password, workFactor: 12);
+
+            string userRoles = "K";
+            if (admin)
+            {
+                userRoles += "A";
+            }
+            if (yapimci)
+            {
+                userRoles += "Y";
+            }
+            user.Role = userRoles;
+
+            _dc.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -68,6 +68,7 @@ namespace DOSP.Controllers
         {
             User k = _dc.Users.FirstOrDefault(x => x.ID == id);
             _dc.Users.Remove(k);
+
             _dc.SaveChanges();
 
             return RedirectToAction("Index");
