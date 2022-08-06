@@ -4,8 +4,10 @@
 }
 
 .content-main {
-    width: 890px;
-    padding: 15px;
+    position: absolute;
+    width: var(--container-width);
+    left: calc((100% - var(--container-width)) / 2);
+    padding: var(--gap);
     min-height: 400px;
     margin: auto;
     background: #282828;
@@ -81,9 +83,23 @@
 .error-popup {
     position: absolute;
     top: 0;
-    left: 50%;
-    padding: 2rem;
+    left: 25%;
+    width: 50%;
+    padding: 1rem;
     background-color: #a85748;
     color: #eee;
     font-size: 1rem;
+    text-align: center;
+}
+
+.success-popup {
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    padding: 1rem;
+    background-color: #a85748;
+    color: #eee;
+    font-size: 1rem;
+    text-align: center;
 }

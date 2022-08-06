@@ -12,13 +12,6 @@
     <a>@Model.Nickname</a>
 }
 
-@section scripts {
-    <script>
-        var h1width = $(".container-hasGames>h1").width() + 11;
-        $(".container-hasGames>#border").css("width", "calc(100% - " + h1width + "px)");
-    </script>
-}
-
 <div class="user-header">
     <img class="user-img" src="~/Content/Images/users/@Model.ProfilePicture" />
     <h2 id="regdate">@Model.RegistrationDate.ToString("dd MMMM yyyy")</h2>
@@ -29,7 +22,6 @@
 
 <div class="container-hasGames">
     <h1>@oyunSayisi Oyun Sahibi</h1>
-    <div id="border"></div>
 </div>
 <div class="user-gamelist">
     @foreach (Library l in ViewBag.kutuphane)

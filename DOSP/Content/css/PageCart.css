@@ -1,6 +1,6 @@
 ﻿.cart-item {
     width: 100%;
-    height: 80px;
+    height: 110px;
     padding: var(--gap);
     border-bottom: 1px solid #fff2;
 }
@@ -64,7 +64,7 @@
 }
 
 .cart-total {
-    height: 38px;
+    height: 40px;
     border: 1px solid var(--ultrared);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;

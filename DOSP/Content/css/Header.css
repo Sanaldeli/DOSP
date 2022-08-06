@@ -4,7 +4,7 @@
 }
 
 .header-box {
-    width: 920px;
+    width: var(--container-width);
     margin: auto;
 }
 
@@ -41,8 +41,8 @@ a.header-logobox {
 .header-pic {
     float: right;
     border: 3px solid var(--goldcrayola);
-    width: 49px;
-    height: 49px;
+    width: 55px;
+    height: 55px;
 }
 
     .header-pic > img {

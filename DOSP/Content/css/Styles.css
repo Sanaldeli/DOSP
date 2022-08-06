@@ -17,7 +17,8 @@
 /************************/
 
 :root {
-	--gap: 10px;
+	--container-width: 920px;
+	--gap: 15px;
 	--darkbyzantium: #59344F;
 	--goldcrayola: #F3C677;
 	--ultrared: #F37793;
@@ -68,7 +69,7 @@ tr:nth-child(even) {
 td {
 	border: 1px solid #333;
 	text-align: left;
-	padding: 8px;
+	padding: 5px;
 	font-weight: 400;
 }
 

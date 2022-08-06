@@ -5,7 +5,7 @@
 }
 
 .game-list {
-    width: 700px;
+    width: 760px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -23,7 +23,7 @@
     width: 700px;
     border-radius: 5px;
     background: #333;
-    margin-bottom: var(--gap);
+    margin-bottom: 5px;
 }
 
     .game-content:last-of-type {
@@ -39,7 +39,6 @@
 .game-price {
     padding: 7px var(--gap);
     width: fit-content;
-    height: 21px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;

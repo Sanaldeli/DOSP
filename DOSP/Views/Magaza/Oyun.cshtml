@@ -47,7 +47,7 @@
 
 @section scripts {
     <script>
-        var slideIndex = 1;
+        @*var slideIndex = 1;
         showSlides(slideIndex);
 
         // Next/previous controls
@@ -69,7 +69,7 @@
                 slides[i].style.display = "none";
             }
             slides[slideIndex - 1].style.display = "block";
-        }
+        }*@
 
         $("a#canBeAdded").click(function () {       //Sepete ekle
             var id = @Model.ID;
@@ -78,7 +78,7 @@
                     type: "POST",
                     url: "/Sepet/Ekle/" + id,
                     success: function () {
-                        window.location.replace("/");
+                        window.location.replace("/Sepet");
                     },
                     error: function () {
                         alert("Sepete eklenirken hata oluştu.");
@@ -142,7 +142,7 @@
                     ViewBag.gamePriceHover = "Sepete Ekle";
                     ViewBag.icon = "shopping-basket";
                 }
-                <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover" data-oid="@Model.ID">
+                <a class="game-price" id="@ViewBag.gamePriceID" title="@ViewBag.gamePriceHover">
                     <i class="fas fa-@ViewBag.icon"></i>
                     <h1>@(Model.Price + "TL")</h1>
                 </a>
