@@ -14,34 +14,40 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form method="post" action="/Magaza/Ekle" class="form-content" enctype="multipart/form-data">
-    <label for="title">İsim</label>
-    <input for="title" type="text" class="form-ctrl" placeholder="Oyunun ismi" name="Title" required />
+<form method="post" action="/Magaza/Ekle" enctype="multipart/form-data">
+    <div class="form-content">
+        <div class="form-col">
+            <label for="title">İsim</label>
+            <input for="title" type="text" class="form-ctrl" placeholder="Oyunun ismi" name="Title" required />
 
-    <label for="price">Fiyat</label>
-    <input for="price" type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="Price" required />
+            <label for="price">Fiyat</label>
+            <input for="price" type="number" class="form-ctrl" placeholder="Oyunun fiyatı" name="Price" required />
 
-    <label for="description">Açıklama</label>
-    <textarea for="description" class="form-ctrl" placeholder="Oyunun açıklaması" name="Description"></textarea>
+            <label for="description">Açıklama</label>
+            <textarea for="description" class="form-ctrl" placeholder="Oyunun açıklaması" name="Description"></textarea>
+        </div>
 
-    <label for="release-date">Çıkış Tarihi</label>
-    <input for="release-date" type="date" class="form-ctrl" placeholder="Çıkış tarihi" name="ReleaseDate" />
+        <div class="form-col">
+            <label for="release-date">Çıkış Tarihi</label>
+            <input for="release-date" type="date" class="form-ctrl" placeholder="Çıkış tarihi" name="ReleaseDate" />
 
-    <label for="category">Kategori</label>
-    <select for="category" class="form-ctrl" name="CategoryID" required>
-        <option value="0" selected>Kategori seçiniz</option>
-        @foreach (Category c in ViewBag.ktg)
-        {
-            <option value="@c.ID">@c.Name</option>
-        }
-    </select>
+            <label for="category">Kategori</label>
+            <select for="category" class="form-ctrl" name="CategoryID" required>
+                <option value="0" selected>Kategori seçiniz</option>
+                @foreach (Category c in ViewBag.ktg)
+                {
+                    <option value="@c.ID">@c.Name</option>
+                }
+            </select>
 
-    <input type="hidden" name="DeveloperID" value="@Model.ID" />
+            <input type="hidden" name="DeveloperID" value="@Model.ID" />
 
-    <label for="cover-photo">Kapak Görseli</label>
-    <input type="file" class="form-ctrl" name="file" />
+            <label for="cover-photo">Kapak Görseli</label>
+            <input type="file" class="form-ctrl" name="file" />
 
-    <input type="submit" value="Oluştur" class="btn btn-green" />
+            <input type="submit" value="Oluştur" class="btn btn-green" />
+        </div>
+    </div>
 </form>
 
 <a style="font-size: 12px; line-height: 15px;" href="/Yapimci/Firma">< Listeye Dön</a>

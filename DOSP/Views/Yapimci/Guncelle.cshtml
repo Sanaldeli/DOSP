@@ -14,22 +14,26 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form action="/Yapimci/Guncelle" method="post" role="form" class="form-content">
-    @if (Model != null)
-    {
-        <input type="hidden" name="ID" value="@Model.ID" />
-    }
+<form action="/Yapimci/Guncelle" method="post" role="form">
+    <div class="form-content">
+        <div class="form-col">
+            @if (Model != null)
+            {
+                <input type="hidden" name="ID" value="@Model.ID" />
+            }
 
-    <input class="form-ctrl" value="@Model.Name" type="text" name="Name" placeholder="Firma adını giriniz" required />
+            <input class="form-ctrl" value="@Model.Name" type="text" name="Name" placeholder="Firma adını giriniz" required />
 
-    <select class="form-ctrl" name="UserID" required>
-        <option value="@Model.UserID" selected>@Model.User.Nickname</option>
-        @foreach (User u in ViewBag.kullanici)
-        {
-            <option value="@u.ID">@u.Nickname</option>
-        }
-    </select>
-    <button type="submit" class="btn btn-yellow">Kaydet</button>
+            <select class="form-ctrl" name="UserID" required>
+                <option value="@Model.UserID" selected>@Model.User.Nickname</option>
+                @foreach (User u in ViewBag.kullanici)
+                {
+                    <option value="@u.ID">@u.Nickname</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-yellow">Kaydet</button>
+        </div>
+    </div>
 </form>
 
 <a href="/Yapimci" style="font-size: 12px; line-height: 15px;">< Listeye Dön</a>

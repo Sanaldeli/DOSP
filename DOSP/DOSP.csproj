@@ -249,6 +249,28 @@
     <Content Include="Content\Assets\css\PageUser.css" />
     <Content Include="Content\Assets\Images\background.jpg" />
     <Content Include="Content\Assets\Images\users\default-pp.jpg" />
+    <Content Include="Content\css\Content.css" />
+    <Content Include="Content\css\Footer.css" />
+    <Content Include="Content\css\Header.css" />
+    <Content Include="Content\css\PageAdmin.css" />
+    <Content Include="Content\css\PageCart.css" />
+    <Content Include="Content\css\PageGame.css" />
+    <Content Include="Content\css\PageStore.css" />
+    <Content Include="Content\css\PageSupport.css" />
+    <Content Include="Content\css\PageUser.css" />
+    <Content Include="Content\css\Styles.css" />
+    <Content Include="Content\Images\.gitignore" />
+    <Content Include="Content\Images\background.jpg" />
+    <Content Include="Content\Images\bgpt.png" />
+    <Content Include="Content\Images\favicon.png" />
+    <Content Include="Content\Images\gcont\6d0badcb-b260-49bc-87a7-2ebfc9b17232.png" />
+    <Content Include="Content\Images\gcont\79117068-5fd4-4b4c-81bc-2e453c961bad.jpg" />
+    <Content Include="Content\Images\gcont\9fb22c9b-b71b-42d7-8bb9-53c024c81b89.jpg" />
+    <Content Include="Content\Images\gcont\af1f0975-5edf-43be-ab84-628fdceb9358.jpg" />
+    <Content Include="Content\Images\gcont\game-photo.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\users\8346f7b9-bdb0-471c-bc2f-4564c975fa1f.jpg" />
+    <Content Include="Content\Images\users\default-pp.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model.Context.tt">
@@ -307,7 +329,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Model.edmx">

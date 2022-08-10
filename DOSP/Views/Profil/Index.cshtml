@@ -13,11 +13,12 @@
 }
 
 <div class="user-header">
-    <img class="user-img" src="~/Content/Images/users/@Model.ProfilePicture" />
+    <img src="~/Content/Images/users/@Model.ProfilePicture" class="user-img" alt="Kullanıcı profil fotoğrafı" />
     <h2 id="regdate">@Model.RegistrationDate.ToString("dd MMMM yyyy")</h2>
     <h1 class="username">@Model.Nickname</h1>
     <br />
     <h2 id="realname">@Model.FullName</h2>
+    <a href="/Profil/Duzenle" class="btn btn-yellow">Düzenle</a>
 </div>
 
 <div class="container-hasGames">

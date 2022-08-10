@@ -11,12 +11,16 @@
 
 <h1>Ticket Oluştur</h1>
 
-<form action="/Destek/Ticket" method="post" role="form" class="form-content">
-    <label>Konu</label>
-    <input type="text" class="form-ctrl" placeholder="Konuyu yazınız" name="Title" required />
+<form action="/Destek/Ticket" method="post" role="form">
+    <div class="form-content">
+        <div class="form-col">
+            <label>Konu</label>
+            <input type="text" class="form-ctrl" placeholder="Konuyu yazınız" name="Title" required />
 
-    <label>Açıklama</label>
-    <textarea class="form-ctrl" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz." name="Description"></textarea>
+            <label>Açıklama</label>
+            <textarea class="form-ctrl" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz." name="Description"></textarea>
 
-    <input type="submit" class="btn btn-yellow" value="Gönder" />
+            <input type="submit" class="btn btn-yellow" value="Gönder" />
+        </div>
+    </div>
 </form>

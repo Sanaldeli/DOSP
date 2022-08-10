@@ -4,6 +4,7 @@
     padding: var(--gap);
     background: #333;
     border-radius: var(--gap);
+    position: relative;
 }
 
 img.user-img {
@@ -21,6 +22,12 @@ h1.username {
     font-weight: 700;
     float: left;
     width: fit-content;
+}
+
+.user-header > a {
+    position: absolute;
+    bottom: 0;
+    right: var(--gap);
 }
 
 .user-header > h2 {

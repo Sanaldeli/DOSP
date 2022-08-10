@@ -40,8 +40,12 @@ namespace DOSP.Controllers
             return RedirectToAction("Index", "Magaza");
         }
 
+        [HttpGet]
         public ActionResult Kayit()
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Magaza");
+
             return View();
         }
 
@@ -59,6 +63,8 @@ namespace DOSP.Controllers
             }
 
             k.Password = BCryptNet.HashPassword(inputKey: k.Password, workFactor: 12);
+            k.Role = "K";
+            k.ProfilePicture = "default-pp.jpg";
 
             _dc.Configuration.ValidateOnSaveEnabled = false;
             _dc.Users.Add(k);

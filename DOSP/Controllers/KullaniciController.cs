@@ -66,7 +66,7 @@ namespace DOSP.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Sil(int id)
         {
-            User k = _dc.Users.FirstOrDefault(x => x.ID == id);
+            User k = _dc.Users.Find(id);
             _dc.Users.Remove(k);
 
             _dc.SaveChanges();

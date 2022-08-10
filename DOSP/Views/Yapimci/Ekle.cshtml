@@ -14,18 +14,21 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form action="/Yapimci/Ekle" method="post" role="form" class="form-content">
+<form action="/Yapimci/Ekle" method="post" role="form">
+    <div class="form-content">
+        <div class="form-col">
+            <input class="form-ctrl" value="" type="text" name="Name" placeholder="Firma adını giriniz" required />
 
-    <input class="form-ctrl" value="" type="text" name="Name" placeholder="Firma adını giriniz" required />
-
-    <select class="form-ctrl" name="UserID" required>
-        <option value="0" selected>Kullanıcı seçiniz</option>
-        @foreach (User u in ViewBag.kullanici)
-        {
-            <option value="@u.ID">@u.Nickname</option>
-        }
-    </select>
-    <button type="submit" class="btn btn-yellow">Kaydet</button>
+            <select class="form-ctrl" name="UserID" required>
+                <option value="0" selected>Kullanıcı seçiniz</option>
+                @foreach (User u in ViewBag.kullanici)
+                {
+                    <option value="@u.ID">@u.Nickname</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-yellow">Kaydet</button>
+        </div>
+    </div>
 </form>
 
 <a href="/Yapimci" style="font-size: 12px; line-height: 15px;">< Listeye Dön</a>

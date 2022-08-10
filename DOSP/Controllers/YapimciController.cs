@@ -55,16 +55,17 @@ namespace DOSP.Controllers
         public ActionResult Ekle(Developer y)
         {
             Developer ypm = _dc.Developers.FirstOrDefault(x => x.ID == y.ID);
-            if (ypm == null)
+            if (ypm is null)
             {
                 _dc.Developers.Add(y);
             }
-            else
-            {
-                ypm.Name = y.Name;
-                ypm.UserID = y.UserID;
-            }
-            ypm.User.Role += "Y";
+
+            //ypm.Name = y.Name;
+            //ypm.UserID = y.UserID;
+            y.User = _dc.Users.Find(y.UserID);
+
+            y.User.Role += "Y";
+
             _dc.SaveChanges();
             return RedirectToAction("Index");
         }

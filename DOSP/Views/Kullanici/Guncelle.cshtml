@@ -27,32 +27,38 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form method="post" action="/Kullanici/Guncelle" class="form-content">
+<form method="post" action="/Kullanici/Guncelle">
     <input type="hidden" name="ID" value="@Model.ID" />
 
-    <label for="rumuz">Nickname</label>
-    <input type="text" class="form-ctrl" placeholder="Rumuz" name="Nickname" value="@Model.Nickname" disabled />
+    <div class="form-content">
+        <div class="form-col">
+            <label for="rumuz">Nickname</label>
+            <input type="text" class="form-ctrl" placeholder="Rumuz" name="Nickname" value="@Model.Nickname" disabled />
 
-    <label for="adSoyad">İsim Soyisim</label>
-    <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
+            <label for="adSoyad">İsim Soyisim</label>
+            <input type="text" class="form-ctrl" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
 
-    <label for="bakiye">Bakiye</label>
-    <input type="number" class="form-ctrl" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
+            <label for="bakiye">Bakiye</label>
+            <input type="number" class="form-ctrl" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
+        </div>
 
-    <label for="Şifre">Şifre</label>
-    <input type="password" class="form-ctrl" placeholder="Mevcut şifreniz" name="CandidatePassword" />
+        <div class="form-col">
+            <label for="Şifre">Şifre</label>
+            <input type="password" class="form-ctrl" placeholder="Mevcut şifreniz" name="CandidatePassword" />
 
-    <div style="float: left;">
-        @Html.CheckBox("yapimci", inRole('Y'))
-        <label for="yapimci" style="line-height: 15px; font-size: 12px; width: fit-content">Yapımcı</label>
+            <div>
+                @Html.CheckBox("yapimci", inRole('Y'))
+                <label for="yapimci" style="line-height: 15px; font-size: 12px; width: fit-content">Yapımcı</label>
+            </div>
+
+            <div>
+                @Html.CheckBox("admin", inRole('A'))
+                <label for="admin" style="line-height: 15px; font-size: 12px; width: fit-content">Admin</label>
+            </div>
+
+            <input type="submit" value="Kaydet" class="btn btn-green" />
+        </div>
     </div>
-
-    <div style="float: right;">
-        @Html.CheckBox("admin", inRole('A'))
-        <label for="admin" style="line-height: 15px; font-size: 12px; width: fit-content">Admin</label>
-    </div>
-    <br />
-    <input type="submit" value="Kaydet" class="btn btn-green" />
 </form>
 
 <div style="font-size: 12px; line-height: 15px;">

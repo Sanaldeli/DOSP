@@ -13,22 +13,25 @@
 
 <h1>Oyunu Raporla</h1>
 
-<form action="/Destek/Rapor" method="post" class="form-content" role="form">
-    <input type="hidden" name="GameID" value="@ViewBag.Oyun.ID" />
+<form action="/Destek/Rapor" method="post" role="form">
+    <div class="form-content">
+        <div class="form-col">
+            <input type="hidden" name="GameID" value="@ViewBag.Oyun.ID" />
 
-    <label>Lütfen konuyu seçiniz</label>
-    <select class="form-ctrl" name="CategoryID" required>
-        @foreach (ReportCategory rC in Model)
-        {
-            <option value="@rC.ID" title="@rC.Description">@rC.Name</option>
-        }
-    </select>
+            <label>Lütfen konuyu seçiniz</label>
+            <select class="form-ctrl" name="CategoryID" required>
+                @foreach (ReportCategory rC in Model)
+                {
+                    <option value="@rC.ID" title="@rC.Description">@rC.Name</option>
+                }
+            </select>
 
-    <label>Açıklama</label>
-    <textarea class="form-ctrl" name="Description" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz."></textarea>
+            <label>Açıklama</label>
+            <textarea class="form-ctrl" name="Description" placeholder="Şikayetinizle alakalı daha çok açıklama girebilirsiniz."></textarea>
 
-    <input type="submit" class="btn btn-yellow" value="Gönder" />
-
+            <input type="submit" class="btn btn-yellow" value="Gönder" />
+        </div>
+    </div>
 </form>
 
 <a href="/Magaza/Oyun/@ViewBag.Oyun.ID" style="font-size: 12px; line-height: 15px;">< Oyuna Dön</a>

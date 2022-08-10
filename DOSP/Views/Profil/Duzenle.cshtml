@@ -10,28 +10,33 @@
     <a>Profili Düzenle</a>
 }
 
-<form method="post" action="/Profil/Duzenle" class="form-content" enctype="multipart/form-data">
+<form method="post" action="/Profil/Duzenle" enctype="multipart/form-data">
     <input type="hidden" name="ID" value="@Model.ID" />
+    <div class="form-content">
+        <div class="form-col">
+            <label for="nickname">Nickname</label>
+            <input type="text" class="form-ctrl" id="nickname" name="Nickname" value="@Model.Nickname" disabled />
 
-    <label for="nickname">Nickname</label>
-    <input type="text" class="form-ctrl" id="nickname" name="Nickname" value="@Model.Nickname" disabled />
+            <label for="fullname">İsim Soyisim</label>
+            <input type="text" class="form-ctrl" id="fullname" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
 
-    <label for="fullname">İsim Soyisim</label>
-    <input type="text" class="form-ctrl" id="fullname" placeholder="İsim Soyisim" name="FullName" value="@Model.FullName" required />
+            <label for="wallet">Bakiye</label>
+            <input type="number" class="form-ctrl" id="wallet" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
+        </div>
 
-    <label for="wallet">Bakiye</label>
-    <input type="number" class="form-ctrl" id="wallet" placeholder="Bakiye" name="Wallet" value="@Model.Wallet" />
+        <div class="form-col">
+            <label for="Şifre">Şifre</label>
+            <input type="password" class="form-ctrl" placeholder="Mevcut şifreniz" name="CurrentPassword" />
+            <input type="password" class="form-ctrl" placeholder="Yeni şifreniz" name="NewPassword" />
 
-    <label for="Şifre">Şifre</label>
-    <input type="password" class="form-ctrl" placeholder="Mevcut şifreniz" name="CurrentPassword" />
-    <input type="password" class="form-ctrl" placeholder="Yeni şifreniz" name="NewPassword" />
+            <label for="profile-picture">Profil Resmi</label>
+            <img src="~/Content/Images/users/@Model.ProfilePicture" width="80" />
+            <input type="hidden" name="CoverPhoto" value="@Model.ProfilePicture" />
+            <input type="file" class="form-ctrl" name="file" />
 
-    <label for="profile-picture">Profil Resmi</label>
-    <img src="~/Content/Images/users/@Model.ProfilePicture" width="80" />
-    <input type="hidden" name="CoverPhoto" value="@Model.ProfilePicture" />
-    <input type="file" class="form-ctrl" name="file" />
-
-    <br />
+            <br />
+        </div>
+    </div>
     <input type="submit" value="Kaydet" class="btn btn-green" />
 </form>
 
