@@ -16,10 +16,10 @@ namespace DOSP.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
-                return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Magaza");
 
-            return RedirectToAction("Index", "Magaza");
+            return View();
         }
 
         [HttpPost]
